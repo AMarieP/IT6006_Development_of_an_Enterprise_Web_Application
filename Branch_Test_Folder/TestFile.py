@@ -1,4 +1,4 @@
-hello = 'Hello World'
+hello = None
 
 
 if hello is not None:
