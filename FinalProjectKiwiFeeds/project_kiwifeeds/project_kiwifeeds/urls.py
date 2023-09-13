@@ -24,8 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("__debug__/", include("debug_toolbar.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
-    # path('', views.home , name='home-page'),
     path('', views.HomeView.as_view() , name='home-page'),
+    #app_user URL
+    path('', include('app_user.urls') , namespace='user'),
 
 ]
 
