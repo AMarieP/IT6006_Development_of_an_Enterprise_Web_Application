@@ -1,16 +1,25 @@
 from django.shortcuts import render
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 
-class UserProfileView():
+class UserProfileView(DeleteView):
     pass
 
-class UserUpdateView():
+class UserUpdateView(UpdateView):
     pass
 
-class UserCreateView():
+class UserCreateView(CreateView):
     pass
 
-class UserDeleteView():
+class UserDeleteView(DeleteView):
+    pass
+
+#Login and Logout Using Django auth
+
+class UserLoginView(LoginView):
+    pass
+
+class UserLogoutView(LogoutView):
     pass
