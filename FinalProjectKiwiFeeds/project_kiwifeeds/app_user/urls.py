@@ -1,11 +1,17 @@
 from django.urls import path
-from .views import UserCreateView, UserDeleteView, UserProfileView, UserUpdateView
+from django.contrib.auth import views
+from .views import *
 
 urlpatterns = [
     path("signup/", UserCreateView.as_view(), name="signup"),
-    path("profile-page/", UserProfileView.as_view(), name="profile-page"),
-    path("delete-account/", UserDeleteView.as_view(), name="delete-account"),
-    path("edit-profile/", UserUpdateView.as_view(), name="edit-profile"),
-
+    path("user/<int:pk>/", UserProfileView.as_view(), name="profile-page"),
+    path("uer/<int:pk>/delete-account/", UserDeleteView.as_view(), name="delete-account"),
+    path("user/<int:pk>/edit-profile/", UserUpdateView.as_view(), name="edit-profile"),
+    path('login/', UserLoginView.as_view(), name='login'),
+    path('user/<int:pk>/logout/', UserLogoutView.as_view(), name='logout'),
+    # path('change-password/', UserChangePassword.as_view(), name='change-password'),
+    # path('change-success/', UserPasswordChangeDone.as_view(), name='change-success')
 
 ]
+
+#TO DO: Add profile deleted sucess template as a page
