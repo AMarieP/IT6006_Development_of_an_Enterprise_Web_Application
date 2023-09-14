@@ -1,0 +1,49 @@
+{% load static %}
+<footer class="bg-[#F3F3F3] text-white w-full ">
+    <div class="container mx-auto py-10 px-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Contact Information -->
+            <div class="md:col-span-1 flex flex-col  items-center">
+                <a href="/" class=" w-full max-w-[200px] h-auto  flex flex-col  items-center">
+                    <img src="{% static 'logo/Logo-full_round 2.png' %}" alt="Company Logo" class=" -mt-6" />
+                    <p class=" -mt-6 text-justify text-xs text-gray-900">At Kiwi Feeds, we're passionate about connecting you with the finest flavors your city has to offer. Just like the beloved fruit, our platform is all about freshness, variety, and a burst of delightful experiences.</p>
+                </a>
+                
+            </div>
+            
+            <!-- Map (Embed) -->
+            <div class="md:col-span-1 flex flex-col  items-center">
+                <h2 class="text-md mb-4 text-black font-bold" >Quick Links</h2>
+                <ul class='flex justify-center flex-col items-center gap-1 underline'>
+                        <a href="{% url 'home-page' %}" class='text-black text-xs font-semibold'>
+                            <span class="" > Home</span>
+                        </a>  
+                        <a href="{% url 'home-page' %}" class='text-black text-xs font-semibold'>
+                            <span class="decoration-dashed" > Restaurants</span>
+                        </a>  
+                        <a href="{% url 'home-page' %}" class='text-black text-xs font-semibold'>
+                            <span class="decoration-solid" > Customer Login</span>
+                        </a>  
+                        <a href="{% url 'home-page' %}" class='text-black text-xs font-semibold'>
+                            <span class="" > Business login</span>
+                        </a>  
+                </ul>
+            </div>
+            
+            <!-- Social Media Links -->
+            <div class="md:col-span-1 flex flex-col  items-center">
+                <h2 class="text-md font-bold mb-4 text-black">Social Media</h2>
+                <div class="flex gap-4">
+                    <a href="#" class="text-[#DE354C] hover:text-blue-400"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-[#DE354C] hover:text-blue-400"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-[#DE354C] hover:text-blue-400"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Copyright Statement -->
+        <div class="text-center mt-6">
+            <p class="text-sm">&copy; 2023 Your Company. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
