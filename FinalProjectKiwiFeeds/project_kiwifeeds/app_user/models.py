@@ -1,8 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 class UserProfile(models.Model):
-    this_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to=None, height_field=None, width_field=None)
+    this_user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(default='/profile_pics/temp_pfp_placeholder_REPLACE_LATER.avif', upload_to='profile_pics', height_field=None, width_field=None)
     phone_number = models.IntegerField(max_length=10)
-    favourite_restaurants = models.ForeignKey()
+    
+    #Address model
+
+    def __str__(self):
+        return self.this_user.username
+    
+    def get_absolute_url(self):
+        return reverse('app_user:user', args=[self.id])
