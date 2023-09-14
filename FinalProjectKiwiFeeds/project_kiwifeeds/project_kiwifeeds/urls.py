@@ -26,7 +26,7 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path('', views.HomeView.as_view() , name='home-page'),
     #app_user URL
-    path('', include('app_user.urls') , namespace='user'),
+    path('', include('app_user.urls') , name='user'),
 
 ]
 

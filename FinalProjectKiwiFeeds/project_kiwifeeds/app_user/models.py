@@ -13,4 +13,4 @@ class UserProfile(models.Model):
         return self.this_user.username
     
     def get_absolute_url(self):
-        return reverse('app_user:user', args=[self.id])
+        return reverse('profile-page', kwargs={'pk': self.pk})

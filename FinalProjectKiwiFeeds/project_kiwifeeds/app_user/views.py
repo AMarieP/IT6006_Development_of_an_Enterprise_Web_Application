@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, FormView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, FormView, ListView
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 from django.urls import reverse_lazy
 from .models import UserProfile
@@ -8,18 +8,15 @@ from django.http import HttpResponseRedirect
 
 #Create a user, render the default User form as well as the UserPrfile odel on One Page
 class UserCreateView(CreateView):
-    print("hello")
+
     def get(self, request, *args, **kwargs):
-        print('get hello')
         context = {'user_form': UserForm(), 'profile_form': ProfileForm()}
         return render(request, 'app_user/user_signup.html', context)
 
     def post(self, request, *args, **kwargs):
-        print('post hello')
         user_form = UserForm(request.POST)
         profile_form = ProfileForm(request.POST)
         if user_form.is_valid() and profile_form.is_valid():
-            print('valid')
             #save the User
             user = user_form.save()
             user.set_password(user.password)
@@ -30,17 +27,17 @@ class UserCreateView(CreateView):
             if 'picture' in request.FILES:#sets the pfp
                 profile.profile_picture = request.FILES['picture']
             profile.save()
-            return HttpResponseRedirect(reverse_lazy('profile-page'))
+            return HttpResponseRedirect(reverse_lazy('profile-page', kwargs={'pk': profile.pk}))
         else:
             print ('user: ', user_form.errors, 'profile: ', profile_form.errors)
 
         return render(request, 'app_user/user_signup.html', {'user_form': UserForm(), 'profile_form': ProfileForm()})
-    success_url = reverse_lazy('profile-page')
+    # success_url = reverse_lazy('profile-page')
     # template_name = 'app_user/user_signup.html'
 
 class UserProfileView(DetailView):
     model = UserProfile
-    fields = ['profile_picture', 'phone_number']
+    # fields = ['profile_picture', 'phone_number']
     template_name = 'app_user/user_profile_page.html'
 
 class UserUpdateView(UpdateView):
