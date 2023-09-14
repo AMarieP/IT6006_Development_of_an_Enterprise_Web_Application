@@ -4,6 +4,14 @@
 
     <!-- Your content here -->
     <h1>Sign Up Profile</h1>
+    <form action="." method="POST">
+        {% csrf_token %} 
+
+        {{user_form.as_p}}
+        {{profile_form.as_p}}
+        <button type="submit">SUBMIT</button>
+
+    </form>
 
 
 {% endblock %}
