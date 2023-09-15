@@ -17,12 +17,10 @@
     
     {% tailwind_css %}
 </head>
-<body >
-
-    <header>
-        Header
-        <p class='bg-blue-400'> hi</p>
-    </header>
+<body class='w-screen justify-center flex flex-col items-center bg-[#F3F3F3]'>
+    {% include "components/header.html" %}
+    
+    
     
 
     <main >
@@ -34,9 +32,7 @@
 
         <!-- Add footer content here -->
 
-    <footer >
-        Footer
-    </footer>
+    {% include "components/footer.html" %}
     
 </body>
 </html>
