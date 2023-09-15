@@ -2,10 +2,78 @@
 {% load static %}
 {% block content %}
     <!-- Your content here -->
-    <h1>Home page</h1>
-    <img src="{% static 'HomePageImages/main-food-home-page.png' %}" alt="Alternative text" width="200" height="200">
-    <h1>Tailwind setup</h1>
-    <h1 class='text-red-500 bg-black'>Tailwind setup test </h1>
+    {% comment %} <div class="bg-cover bg-center bg-no-repeat h-[400px] w-screen" style="background-image: url('{% static 'main-bg-image.png' %}')"> {% endcomment %}
+    <div class="bg-cover bg-center bg-no-repeat h-[400px] w-screen bg-red-200 flex justify-center " style="background-image: url('{% static 'images/home-page/main-bg-image.png' %}')">
+        <!-- Content goes here -->
+        <!-- main-bg-info -->
+        <div class='flex flex-col justify-center items-center '>
+            <span class='text-white text-3xl font-bold'>
+                    Kiwi Food
+            </span>
+            <span class='md:w-[80%] my-3 w-full px-2 text-center text-white text-xs font-semibold'>
+               At Kiwi Food, we're passionate about connecting you with the finest flavors your city has to offer. Just like the beloved fruit, our platform is all about freshness, variety, and a burst of delightful experiences.
+            </span>
+            <span class='text-white text-xs font-semibold py-1 px-6  border-dotted border-2 rounded-2xl'>
+                Discover Place
+            </span>
+        </div>
+        
+
+    </div>
+
+    <!-- main-info bar 1-->
+    <div class='md:mx-[10%]  sm:mx-[5%] mx-[2%] mt-14 mb-1 justify-center items-center content-center '>
+        <div class='flex md:flex-row  flex-col my-4 md:items-start items-center gap-4' >
+            <div class='max-w-md md:w-3/6 flex flex-col px-2 '>
+                <span class='text-2xl font-bold text-black'>
+                    Explore Local Favourites
+                </span>
+                <span class='text-xs font-normal text-black text-justify my-3'>
+                    Our platform is your gateway to an array of local eateries, from cozy neighbourhood cafes to upscale dining destinations. With Kiwi Feeds, you can easily browse menus, read reviews, and place orders, all in one place.
+                </span>
+                <div>
+                    <span class='text-black border-black text-xs font-semibold py-1 px-6  border-dotted border-2 rounded-2xl'>
+                        Discover Local
+                    </span>    
+                </div>
+                
+            </div>
+
+            <div class='max-w-md md:w-3/6 px-2 my-4 md:mt-0 '>
+                
+                <img src="{% static 'images/home-page/home-page-info-2.png' %}" alt="Company Logo" class="max-h-full max-w-full" />
+                
+            </div>
+        </div>
+    </div>
+    <!-- main-info bar 2-->
+  
+    <div class='md:mx-[10%]  sm:mx-[5%] mx-[2%] mt-14 mb-1 justify-center items-center content-center '>
+        <div class='flex md:flex-row  flex-col my-4 md:items-start items-center gap-4' >
+            <div class='max-w-md md:w-3/6 px-2 my-4 md:mt-0 '>
+                
+                <img src="{% static 'images/home-page/home-page-info-1.png' %}" alt="Company Logo" class="max-h-full max-w-full" />
+                
+            </div>
+            <div class='max-w-md md:w-3/6 flex flex-col px-2 '>
+                <span class='text-2xl font-bold text-black'>
+                    Savour Every Moment
+                </span>
+                <span class='text-xs font-normal text-black text-justify my-3'>
+                    We believe that food isn't just nourishment; it's an art form, a cultural experience, and a source of joy. Whether it's a weekday dinner or a special celebration, Kiwi Feeds is here to make every meal memorable.
+                </span>
+                <div>
+                    <span class='text-black border-black text-xs font-semibold py-1 px-6  border-dotted border-2 rounded-2xl'>
+                        Create Customer Account
+                    </span>    
+                </div>
+                
+            </div>
+
+            
+        </div>
+    </div>
+   
 
 
 {% endblock %}
