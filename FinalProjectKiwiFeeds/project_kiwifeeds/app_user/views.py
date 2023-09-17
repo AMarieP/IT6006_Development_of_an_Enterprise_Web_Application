@@ -40,12 +40,12 @@ class UserCreateView(CreateView):
 class UserProfileView(LoginRequiredMixin, DetailView):
     model = UserProfile
     context_object_name = 'this_user'
-    fields = ['profile_picture', 'phone_number']
+    fields = ['profile_picture', 'phone_number', 'address']
     template_name = 'app_user/user_profile_page.html'
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = UserProfile
-    fields = ['profile_picture', 'phone_number']
+    fields = ['profile_picture', 'phone_number', 'address']
     template_name = 'app_user/user_profile_edit.html'
     #Redirects back to User's pfp
     def get_success_url(self, **kwargs):
