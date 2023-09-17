@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView, FormView, ListView
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 from django.urls import reverse_lazy
+from django.contrib import messages
 from .models import UserProfile
 from .forms import *
 from django.http import HttpResponseRedirect
@@ -37,20 +38,29 @@ class UserCreateView(CreateView):
 
 class UserProfileView(DetailView):
     model = UserProfile
-    # fields = ['profile_picture', 'phone_number']
+    context_object_name = 'thisUser'
+    fields = ['profile_picture', 'phone_number']
     template_name = 'app_user/user_profile_page.html'
 
 class UserUpdateView(UpdateView):
     model = UserProfile
     fields = ['profile_picture', 'phone_number']
-    success_url = reverse_lazy('profile-page')
     template_name = 'app_user/user_profile_edit.html'
+    #Redirects back to User's pfp
+    def get_success_url(self, **kwargs):
+        return reverse_lazy("profile-page", kwargs={'pk': self.object.pk})
 
-#Will need to create template page for succesful deletion or redir to homepage
+#Succesful deletion redir to homepage
 class UserDeleteView(DeleteView):
-    model = UserProfile
-    success_url = reverse_lazy('profile-deleted')
+    model = User
+    context_object_name = 'thisUser'
+    success_url = reverse_lazy('home-page')
     template_name = 'app_user/user_profile_delete.html'
+
+#Have to set up but will give a sucessfully deleted message
+    def form_valid(self, form):
+        messages.success(self.request, "The task was deleted successfully.")
+        return super(UserDeleteView,self).form_valid(form)
 
 # #Views Using Django auth
 
