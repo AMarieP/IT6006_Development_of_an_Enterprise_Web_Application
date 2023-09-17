@@ -8,12 +8,12 @@ from phonenumber_field.widgets import PhoneNumberPrefixWidget
 #Form using default Django Auth class
 class UserForm(forms.ModelForm):
 	email = forms.EmailField(required=True)
-	password1 = forms.CharField(widget=forms.PasswordInput())
-	password2 = forms.CharField(widget=forms.PasswordInput())
+	# password1 = forms.CharField(widget=forms.PasswordInput())
+	# password2 = forms.CharField(widget=forms.PasswordInput())
 
 	class Meta:
 		model = User
-		fields = ("username", "email", "password1", "password2")
+		fields = ("username", "email", 'password')
 
 #Form for Profile Model
 class ProfileForm(forms.ModelForm):

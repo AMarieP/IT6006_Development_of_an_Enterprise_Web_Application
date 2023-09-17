@@ -158,3 +158,4 @@ INTERNAL_IPS = [
 
 #Login URL redirects for login mixin if not logged on
 LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home-page'

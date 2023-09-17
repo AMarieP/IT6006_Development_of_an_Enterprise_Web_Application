@@ -6,7 +6,9 @@ from django.contrib import messages
 from .models import UserProfile
 from .forms import *
 from django.http import HttpResponseRedirect
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import get_object_or_404
+
 
 #Create a user, render the default User form as well as the UserPrfile odel on One Page
 class UserCreateView(CreateView):
@@ -43,13 +45,18 @@ class UserProfileView(LoginRequiredMixin, DetailView):
     fields = ['profile_picture', 'phone_number', 'address']
     template_name = 'app_user/user_profile_page.html'
 
-class UserUpdateView(LoginRequiredMixin, UpdateView):
+class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = UserProfile
     fields = ['profile_picture', 'phone_number', 'address']
     template_name = 'app_user/user_profile_edit.html'
+#Need to add sort of mixin to test if logged in user is same as profile
     #Redirects back to User's pfp
     def get_success_url(self, **kwargs):
         return reverse_lazy("profile-page", kwargs={'pk': self.object.pk})
+    #Check if this user is the owner od the profile to update
+    def test_func(self, user):
+        return (user.is_staff and not user.is_superuser
+                and user.email.endswith(u"mydomain.com"))
 
 #Succesful deletion redir to homepage
 class UserDeleteView(LoginRequiredMixin, DeleteView):
