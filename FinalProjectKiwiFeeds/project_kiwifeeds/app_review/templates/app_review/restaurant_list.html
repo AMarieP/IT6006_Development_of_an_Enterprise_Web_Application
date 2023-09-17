@@ -1,0 +1,20 @@
+{% extends "base.html"%}
+{% block content %}
+
+<h1>Restaurant List</h1>
+
+    {% if restaurant_list %}
+
+    <ul>
+        {% for restaurant in restaurant_list %}
+        <li><h1> {{ restaurant.restaurant_name}} </h1>
+        <p> {{restaurant.restaurant_description}} </p>
+
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p> Restaurant not available</p>
+    {% endif %}
+    
+{% endblock content %}
