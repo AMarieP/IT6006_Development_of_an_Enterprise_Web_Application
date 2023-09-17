@@ -17,6 +17,7 @@ class Review(models.Model):
     #review_id
     #restaurant_name = models.CharField(max_length=255)
     #rating
+    title = models.CharField(max_length=255)
     comment = models.CharField(max_length=255)
     restaurant = models.ForeignKey(Restaurant,on_delete=models.PROTECT, related_name='restaurant')
     user = models.ForeignKey(User,on_delete=models.PROTECT, related_name='user')
