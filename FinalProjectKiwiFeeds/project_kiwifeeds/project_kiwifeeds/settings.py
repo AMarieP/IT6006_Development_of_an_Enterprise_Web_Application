@@ -153,3 +153,6 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+#Login URL redirects for login mixin if not logged on
+LOGIN_URL = 'login'

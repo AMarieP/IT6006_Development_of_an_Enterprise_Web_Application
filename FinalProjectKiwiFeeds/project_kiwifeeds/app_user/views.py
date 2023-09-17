@@ -6,6 +6,7 @@ from django.contrib import messages
 from .models import UserProfile
 from .forms import *
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 #Create a user, render the default User form as well as the UserPrfile odel on One Page
 class UserCreateView(CreateView):
@@ -36,13 +37,13 @@ class UserCreateView(CreateView):
     # success_url = reverse_lazy('profile-page')
     # template_name = 'app_user/user_signup.html'
 
-class UserProfileView(DetailView):
+class UserProfileView(LoginRequiredMixin, DetailView):
     model = UserProfile
-    context_object_name = 'thisUser'
+    context_object_name = 'this_user'
     fields = ['profile_picture', 'phone_number']
     template_name = 'app_user/user_profile_page.html'
 
-class UserUpdateView(UpdateView):
+class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = UserProfile
     fields = ['profile_picture', 'phone_number']
     template_name = 'app_user/user_profile_edit.html'
@@ -51,9 +52,9 @@ class UserUpdateView(UpdateView):
         return reverse_lazy("profile-page", kwargs={'pk': self.object.pk})
 
 #Succesful deletion redir to homepage
-class UserDeleteView(DeleteView):
+class UserDeleteView(LoginRequiredMixin, DeleteView):
     model = User
-    context_object_name = 'thisUser'
+    context_object_name = 'this_user'
     success_url = reverse_lazy('home-page')
     template_name = 'app_user/user_profile_delete.html'
 
@@ -65,8 +66,15 @@ class UserDeleteView(DeleteView):
 # #Views Using Django auth
 
 class UserLoginView(LoginView):
+    redirect_authenticated_user = True
     success_url = reverse_lazy('home-page')
     template_name = 'app_user/user_login.html'
+    
+    #Error Message, rerender login form
+    def form_invalid(self, form):
+        print('Invalid')
+        messages.error(self.request,'Invalid username or password')
+        return self.render_to_response(self.get_context_data(form=form))
 
 class UserLogoutView(LogoutView):
     success_url = reverse_lazy('home-page')
