@@ -8,7 +8,7 @@ class Restaurant(models.Model):
     restaurant_owner = models.CharField(max_length=255)
     restaurant_description = models.CharField(max_length=255)
     restaurant_location = models.CharField(max_length=255)
-    user= models.OneToOneField(User, on_delete=models.Cascade,related_name='user')
+    #user= models.OneToOneField(User, on_delete=models.Cascade,related_name='user')
 
     def __str__(self):
         return f'{self.restaurant_name} {self.restaurant_owner}'
