@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import restaurant_list, review_list, review_details
+from .views import restaurant_list, restaurant_details, review_list, review_details
 from . import views
 
 urlpatterns = [

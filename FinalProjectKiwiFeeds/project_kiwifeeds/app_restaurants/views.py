@@ -13,3 +13,6 @@ def review_details(request, review_id):
 def restaurant_list(request):
     model=Restaurant.objects.all()
     return render(request,'app_restaurants/restaurant_list.html',{"restaurant_list" : model})
+def restaurant_details(request, restaurant_id):
+    model=Restaurant.objects.get(pk=restaurant_id)
+    return render(request, 'app_restaurants/restaurant_details.html',{"restaurant": model})
