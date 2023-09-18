@@ -3,7 +3,7 @@
     <h1>Create New Restaurant</h1>
     <hr>
     <form action="" method="post">
-        {% csrf token %}
+        {% csrf_token %}
         {{form.as_p}}
         <input type="submit"/>
     </form>
