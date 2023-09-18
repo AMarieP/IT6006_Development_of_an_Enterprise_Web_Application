@@ -20,6 +20,10 @@ def restaurant_details(request, restaurant_id):
     return render(request, 'app_restaurants/restaurant_details.html',{"restaurant": model})
 def RestaurantCreateView(request):
     form=RestaurantForm()
+    if request.method == 'POST':
+        form = RestaurantForm(request.POST)
+        if form.is_valid():
+            form.save()
     return render(request,'app_restaurants/create_restaurant.html', {"form": form})
 def RestaurantEditView(request, restaurant_id):
     model = Restaurant.objects.get(pk=restaurant_id)
