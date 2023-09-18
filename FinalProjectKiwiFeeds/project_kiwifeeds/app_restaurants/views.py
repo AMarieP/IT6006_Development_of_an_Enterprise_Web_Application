@@ -29,8 +29,8 @@ def RestaurantEditView(request, restaurant_id):
     model = Restaurant.objects.get(pk=restaurant_id)
     form=RestaurantForm()
     if request.method =='POST':
-        print(request.Post)
-        form=RestaurantForm(request.post,instance=model)
+        print(request.POST)
+        form=RestaurantForm(request.POST,instance=model)
         if form.is_valid():
             form.save()
         else:
