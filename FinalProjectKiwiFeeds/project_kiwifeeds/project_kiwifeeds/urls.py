@@ -26,7 +26,7 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     # path('', views.home , name='home-page'),
     path('', views.HomeView.as_view() , name='home-page'),
-    path("reviews/", include("app_restaurants.urls"))
+    path("restaurants/", include("app_restaurants.urls"))
 ]
 
 if settings.DEBUG:
