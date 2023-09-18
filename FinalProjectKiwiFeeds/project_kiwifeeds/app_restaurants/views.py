@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404 ,render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 from app_restaurants.models import Restaurant
 from app_restaurants.forms import RestaurantForm
@@ -36,4 +36,4 @@ def RestaurantDeleteView(request, restaurant_id):
     if request.method =='POST':
         obj.delete()
         return HttpResponseRedirect("/")
-    return render(request,'app_restaurants/delete_restaurant.html', {"form": form})
+    return render(request,'app_restaurants/delete_restaurant.html', {})
