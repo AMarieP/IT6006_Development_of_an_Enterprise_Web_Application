@@ -31,6 +31,6 @@ def RestaurantEditView(request, restaurant_id):
             form.save()
         else:
             form=RestaurantForm()
-    else
+    else:
         form=RestaurantForm(instance=model)
     return render(request,'app_restaurants/edit_restaurant.html', {"form": form})

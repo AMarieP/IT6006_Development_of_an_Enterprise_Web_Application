@@ -4,8 +4,8 @@ from .views import restaurant_list, restaurant_details, RestaurantCreateView, Re
 urlpatterns = [
    path("", restaurant_list, name="restaurant-list"),
    path("<int:restaurant_id>/", restaurant_details, name="restaurant-details"),
-   path("create/", views.RestaurantCreateView, name="create-restaurant"),
-   path("<int:restaurant_id>/edit/", views.RestaurantEditView, name="edit-restaurant"),
+   path("create/", RestaurantCreateView, name="create-restaurant"),
+   path("<int:restaurant_id>/edit/", RestaurantEditView, name="edit-restaurant"),
 #    path("reviews/", review_list, name="review-list"),
 #    path("review/<int:review_id>/", review_details, name="review-details"),
 ]
