@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import restaurant_list, restaurant_details
+from .views import restaurant_list, restaurant_details, RestaurantCreateView, RestaurantEditView
 
 urlpatterns = [
    path("", restaurant_list, name="restaurant-list"),
