@@ -16,6 +16,7 @@ def RestaurantCreateView(request):
         form = RestaurantForm(request.POST)
         if form.is_valid():
             form.save()
+            return HttpResponseRedirect("/")
     return render(request,'app_restaurants/create_restaurant.html', {"form": form})
 def RestaurantEditView(request, restaurant_id):
     model = Restaurant.objects.get(pk=restaurant_id)
@@ -25,6 +26,7 @@ def RestaurantEditView(request, restaurant_id):
         form=RestaurantForm(request.POST,instance=model)
         if form.is_valid():
             form.save()
+            return HttpResponseRedirect("/")
         else:
             form=RestaurantForm()
     else:
