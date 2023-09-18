@@ -11,7 +11,7 @@ class Restaurant(models.Model):
     user = models.ForeignKey(User,on_delete=models.PROTECT, related_name='user',null=True,blank=True)
 
     def __str__(self):
-        return f'{self.restaurant_name} {self.restaurant_owner}'
+        return f'{self.restaurant_name}, owned by {self.restaurant_owner}'
 
 # class Review(models.Model):
 #     #review_id
