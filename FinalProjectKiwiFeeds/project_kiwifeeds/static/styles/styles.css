@@ -1,0 +1,125 @@
+/* setting global colors */
+
+:root{
+    --c-red: #DE354C;
+    --c-dark-red: #932432;
+    --c-blue: #3C1874;
+    --c-dark-blue: #283747;
+    --c-black: #292929;
+    --c-white: #F3F3F3;
+}
+
+/* adding custom fonts */
+
+@font-face {
+    font-family: "wavehaus";
+    src: url(../../static/fonts/wavehaus/Wavehaus-128Bold.otf);
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "oak sans";
+    src: url(../../static/fonts/oak-sans/OakSansVF.ttf);
+    font-weight: 300 900;
+    font-style: normal;
+}
+
+/* rewrite tailwind 0_______0 */
+
+/* global styles */
+
+body{
+    background-color: #F3F3F3;
+}
+
+section{
+    max-width: 1440px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 75px;
+    padding-bottom: 75px;
+}
+
+/* styles for columns */
+
+.col-wrap{
+    display: flex;
+}
+
+.col-50{
+    width: 50%;
+}
+
+.col-33{
+    width: 33%;
+}
+
+/* typography */
+
+h1,h2,h3,h4,h5{
+    font-family: 'wavehaus';
+}
+
+h1{
+    font-size: 4em;
+}
+
+h2{
+    font-size: 3em;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
+.heading-dark{
+    color: var(--c-black);
+}
+
+p{
+    font-family: 'oak sans';
+    font-weight: 500;
+}
+
+.text{
+    color: var(--c-dark-blue);
+}
+
+/* button styles */
+
+.btn{
+    display: inline-block;
+    font-family: 'wavehaus';
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1em;
+    border: dashed 2px;
+    border-radius: 90px;
+    padding: 10px 50px 10px 50px;
+}
+
+.btn-white{
+    border-color: var(--c-white);
+    color: var(--c-white);
+}
+
+.btn-dark{
+    border-color: var(--c-dark-blue);
+    color: var(--c-dark-blue);
+}
+
+/* home page */
+
+.home-banner{
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url(../images/home-page/main-bg-image.png);
+    background-size: cover;
+    height: 70vh;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-wrap{
+    color: var(--c-white);
+}

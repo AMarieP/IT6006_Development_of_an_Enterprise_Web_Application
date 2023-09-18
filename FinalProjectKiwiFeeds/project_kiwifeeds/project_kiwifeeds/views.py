@@ -12,3 +12,6 @@ from django.views import View
 class HomeView(View):
     def get(self, request):
         return render(request, 'index.html')
+
+def restaraunt_catalog(request):
+    return render(request, 'restaraunt-catalog.html')
