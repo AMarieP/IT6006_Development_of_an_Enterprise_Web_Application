@@ -1,16 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404 ,render
 from django.http import HttpResponse
 
 from app_restaurants.models import Restaurant
 from app_restaurants.forms import RestaurantForm
-
-# Create your views here.
-# def review_list(request):
-#     model=Review.objects.all()
-#     return render(request,'app_restaurants/review_list.html',{"review_list" : model})
-# def review_details(request, review_id):
-#     model=Review.objects.get(pk=review_id)
-#     return render(request, 'app_restaurants/review_details.html',{"review": model})
 
 def restaurant_list(request):
     model=Restaurant.objects.all()
@@ -40,4 +32,8 @@ def RestaurantEditView(request, restaurant_id):
     return render(request,'app_restaurants/edit_restaurant.html', {"form": form})
 def RestaurantDeleteView(request, restaurant_id):
     model={}
+    obj = get_object_or_404(Restaurant, id=restaurant_id)
+    if request.method =='POST':
+        obj.delete()
+        return HttpResponseRedirect("/")
     return render(request,'app_restaurants/delete_restaurant.html', {"form": form})
