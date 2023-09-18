@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from app_restaurants.models import Restaurant
+from app_restaurants.forms import RestaurantForm
 
 # Create your views here.
 # def review_list(request):
@@ -17,3 +18,19 @@ def restaurant_list(request):
 def restaurant_details(request, restaurant_id):
     model=Restaurant.objects.get(pk=restaurant_id)
     return render(request, 'app_restaurants/restaurant_details.html',{"restaurant": model})
+def RestaurantCreateView(request):
+    form=RestaurantForm()
+    return render(request,'app_restaurants/create_restaurant.html', {"form": form})
+def RestaurantEditView(request, restaurant_id):
+    model = Restaurant.objects.get(pk=restaurant_id)
+    form=RestaurantForm()
+    if request.method =='POST':
+        print(request.Post)
+        form=RestaurantForm(request.post,instance=model)
+        if form.is_valid():
+            form.save()
+        else:
+            form=RestaurantForm()
+    else
+        form=RestaurantForm(instance=model)
+    return render(request,'app_restaurants/edit_restaurant.html', {"form": form})
