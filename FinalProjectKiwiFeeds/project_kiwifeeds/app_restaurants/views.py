@@ -38,3 +38,6 @@ def RestaurantEditView(request, restaurant_id):
     else:
         form=RestaurantForm(instance=model)
     return render(request,'app_restaurants/edit_restaurant.html', {"form": form})
+def RestaurantDeleteView(request, restaurant_id):
+    model={}
+    return render(request,'app_restaurants/delete_restaurant.html', {"form": form})
