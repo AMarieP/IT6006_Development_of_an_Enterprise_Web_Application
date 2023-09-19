@@ -25,7 +25,15 @@
     font-style: normal;
 }
 
-/* rewrite tailwind 0_______0 */
+/* overwrite tailwind 0_______0 and other inherited styles*/
+
+ul{
+    list-style-type: none;
+}
+
+a:-webkit-any-link {
+    text-decoration: none;
+}
 
 /* global styles */
 
@@ -75,7 +83,7 @@ h2{
     color: var(--c-black);
 }
 
-p{
+p,a{
     font-family: 'oak sans';
     font-weight: 500;
 }
@@ -95,6 +103,22 @@ p{
     border: dashed 2px;
     border-radius: 90px;
     padding: 10px 50px 10px 50px;
+    transition: .1s;
+}
+
+.btn:hover{
+    border: solid 2px;
+    transition: .2s;
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+.btn:active{
+    background-color: var(--c-red);
+    color:var(--c-white);
+    border-color: var(--c-red);
+    transition: .05s;
+    transform: scale(0.98);
 }
 
 .btn-white{
@@ -105,6 +129,31 @@ p{
 .btn-dark{
     border-color: var(--c-dark-blue);
     color: var(--c-dark-blue);
+}
+
+/* links styles */
+
+.t-link{
+    text-decoration: underline dashed;
+}
+
+.t-link:hover{
+    text-decoration: underline;
+}
+
+.t-link-b{
+    color: inherit;
+}
+
+.t-link-w{
+    color: inherit;
+}
+
+
+/* icon styles */
+
+.icon{
+
 }
 
 /* home page */
@@ -122,4 +171,79 @@ p{
 
 .banner-wrap{
     color: var(--c-white);
+}
+
+/* restaraunt catalog */
+
+.info-wrap-list{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+}
+
+.r-info-text{
+    color: var(--c-red);
+    margin-right: 20px;
+}
+
+.icon{
+    max-height: 16px;
+}
+
+.r-title{
+    color: var(--c-blue);
+}
+
+/* login & sign up */
+
+.login-reg-cta{
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 30px;
+    text-align: center;
+    padding: 20px;
+    transition: all 0.2s;
+}
+
+.login-reg-cta:hover{
+    transform: scale(1.02);
+}
+
+.cta-heading{
+    color: var(--c-white);
+}
+
+.cta-par{
+    color: var(--c-white);
+}
+
+.btn-cta{
+    width: 100%;
+    text-align: center;
+}
+
+.col-wrapper-small{
+    display: flex;
+}
+
+.cta-small-col{
+    display: flex;
+    padding: 5px;
+}
+
+#reviewer-cta{
+    background: linear-gradient(272deg,rgba(147, 36, 50, 0.70) 0%, rgba(41, 41, 41, 0.70) 100%), url(../images/login-sign-up/reviewer.jpg);
+    background-size: cover;
+}
+
+#business-cta{
+    background: linear-gradient(272deg,rgba(60, 24, 116, 0.70) 0%, rgba(41, 41, 41, 0.70) 100%), url(../images/login-sign-up/business.jpg);
+    background-size: cover;
+}
+
+/* details page */
+
+.info-wrap-details{
+    display: block;
 }

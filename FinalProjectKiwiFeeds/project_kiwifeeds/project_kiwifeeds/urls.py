@@ -27,6 +27,8 @@ urlpatterns = [
     # path('', views.home , name='home-page'),
     path('', views.HomeView.as_view() , name='home-page'),
     path('restaraunt-catalog', views.restaraunt_catalog),
+    path('login-signup', views.login_or_signup),
+    path('restaurant-details', views.restaraunt_details),
 
 ]
 

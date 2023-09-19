@@ -3,21 +3,21 @@
 {% block content %}
 
 <section>
-    <h1>All Tours</h1>
+    <h1>All Restaraunts</h1>
     <ul>
         <div class="list-wrap">
             <li>
-                <h2 class="list-title"></h2>
+                <h2 class="r-title t-link">{{ r_name }}</h2>
                 <div class="info-wrap-list">
-                    <p class="info-text tour-price">From NZ$</p>
-                    <p class="info-text">Location: <span class="tour-location">Location</span></p>
+                    <img class="icon" src="{% static 'images/icons/location-pin.png' %}">
+                    <a class="t-link r-info-text">{{r_address}}</a>
+                    <img class="icon" src="{% static 'images/icons/star.png' %}">
+                    <a class="t-link r-info-text">{{r_rating}}</a>
                 </div>
-                <p class="list-desc">
-                    
+                <p class="text">{{ r_desc }}</p>
                 </p>
                 <div class="button-wrap">
-                    <a href="/tour/"class="button dark">View Tour</a>
-                    <a href="/agent/"class="button dark">Contact Agent</a>
+                    <a href=""class="btn btn-dark">View Details</a>
                 </div>
             </li>
         </div>
