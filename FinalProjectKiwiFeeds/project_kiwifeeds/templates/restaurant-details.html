@@ -3,18 +3,44 @@
 {% block content %}
 
 <section>
-    <h2 class="r-title t-link">{{ r_name }}</h2>
+    <h1 class="r-title">{{ r_name }}</h1>
     <div class="info-wrap-details">
-        <img class="icon" src="{% static 'images/icons/location-pin.png' %}">
-        <a class="t-link r-info-text">{{r_address}}</a>
-        <img class="icon" src="{% static 'images/icons/star.png' %}">
-        <a class="t-link r-info-text">{{r_rating}}</a>
+        <div class="res-details-wrap">
+            <div class="icon-text-wrap">
+                <img class="icon" src="{% static 'images/icons/location-pin.png' %}">
+                <a class="r-info-text">{{r_address}}</a>
+            </div>
+            <div class="icon-text-wrap">
+                <img class="icon" src="{% static 'images/icons/star.png' %}">
+                <a class="r-info-text">{{r_rating}}</a>
+            </div>
+            <div class="icon-text-wrap">
+                <img class="icon" src="{% static 'images/icons/owner.png' %}">
+                <a class="r-info-text">{{r_owner}}</a>
+            </div>
+        </div>
     </div>
     <p class="text">{{ r_desc }}</p>
     </p>
     <div class="button-wrap">
-        <a href=""class="btn btn-dark">View Details</a>
+        <a href=""class="btn btn-dark">Get Directions</a>
+        <a href=""class="btn btn-dark">View Menu</a>
     </div>
+</section>
+<section>
+    <h2>Reviews</h2>
+    <ul>
+        <div class="reviews-wrap">
+            <li>
+                <h3 class="rev-name">{{rev_name}}</h3>
+                <div class="rating-wrap">
+                    <img class="icon" src="{% static 'images/icons/star.png' %}">
+                    <a class="r-info-text">{{rev_rating}}</a>
+                </div>
+                <p class="review-text text">{{rev_review}}</p>
+            </li>
+        </div>
+    </ul>
 </section>
 
 {% endblock %}

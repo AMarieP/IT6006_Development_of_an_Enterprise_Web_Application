@@ -25,7 +25,7 @@
     font-style: normal;
 }
 
-/* overwrite tailwind 0_______0 and other inherited styles*/
+/* overwrite tailwind 0_______0 and other inherited styles */
 
 ul{
     list-style-type: none;
@@ -57,10 +57,12 @@ section{
 
 .col-50{
     width: 50%;
+    padding: 20px;
 }
 
 .col-33{
     width: 33%;
+    padding: 20px;
 }
 
 /* typography */
@@ -77,6 +79,10 @@ h2{
     font-size: 3em;
     margin-block-start: 0em;
     margin-block-end: 0em;
+}
+
+h3{
+    font-size: 2em ;
 }
 
 .heading-dark{
@@ -99,6 +105,7 @@ p,a{
     font-family: 'wavehaus';
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-right: 10px;
     font-size: 1em;
     border: dashed 2px;
     border-radius: 90px;
@@ -139,12 +146,13 @@ p,a{
 
 .t-link:hover{
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .t-link-b{
     color: inherit;
-}
 
+}
 .t-link-w{
     color: inherit;
 }
@@ -155,6 +163,44 @@ p,a{
 .icon{
 
 }
+
+/* header */
+
+#header{
+    display: flex;
+}
+
+.header-logo{
+    max-height: 100px;
+}
+
+.col-head-menu{
+    text-align: right;
+}
+
+.menu-link{
+    margin-left: 30px;
+}
+
+/* footer */
+
+.footer-logo{
+    width: 100%;
+}
+
+.q-links-wrap{
+    text-align: center;
+}
+
+.f-link{
+    margin-top: 10px;
+}
+
+#soc-med-text{
+text-align: center;
+}
+
+/* ----------------page stylings------------------- */
 
 /* home page */
 
@@ -246,4 +292,13 @@ p,a{
 
 .info-wrap-details{
     display: block;
+}
+
+.res-details-wrap{
+    margin-top: 20px;
+}
+
+.icon-wrap-text{
+    margin-top: 5px;
+    margin-bottom: 5px;
 }

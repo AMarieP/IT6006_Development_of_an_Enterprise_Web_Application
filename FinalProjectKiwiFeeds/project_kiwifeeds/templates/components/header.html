@@ -1,46 +1,13 @@
 {% load static %}
-<header class='flex flex-col sm:flex-row  px-[10%] bg-[#D9D9D9] sm:justify-between justify-center w-full  items-center '>
-    <a href="/" class="self-center w-[100px] h-[90px]  flex items-center justify-center rounded-lg">
-        <img src="{% static 'logo/Logo-full_round 2.png' %}" alt="Company Logo" class="max-h-full max-w-full" />
-    </a>
-
-    <div class="flex-col flex-wrap  justify-center py-5 px-1  items-center ">
-        <label for="menu-toggle" class="md:hidden  cursor-pointer text-sm font-bold tracking-wider p-1 px-5 rounded-md bg-sky-300 flex gap-2 items-center hover:bg-blue-400 ">
-            <i class="block md:hidden fas fa-bars"></i>
-            Menu
-        </label>
-        <input type="checkbox" id="menu-toggle" class="hidden" />
-        <ul id="menu-item" class='hidden  flex-col md:flex md:flex-row absolute self-start md:static   gap-10  text-xl font-bold justify-center items-center'>
-            <li class="rounded-md ">
-                <a href="{% url 'home-page' %}" class='tracking-wider p-1 px-5 rounded-md flex gap-2 items-center {% if request.resolver_match.url_name == 'home-page' %} bg-sky-200 {% else %} bg-[#D9D9D9] {% endif %}'>
-                    <i class="block fas fa-home"></i>
-                    <span class="text-sm md:font-semibold tracking-wider font-bold capitalize " > Home</span>
-                </a>  
-            </li>
-            <li class="rounded-md ">
-                <a href="{% url 'home-page' %}" class='tracking-wider p-1 px-5 rounded-md  flex gap-2 items-center {% if request.resolver_match.url_name == 'restaurants-page' %} bg-sky-200 {% else %} bg-[#D9D9D9] {% endif %}'>
-                    <i class="block fas fa-utensils"></i>
-                    <span class="text-sm md:font-semibold tracking-wider font-bold capitalize " > Restaurants</span>
-                </a>  
-            </li>
-            <li class="rounded-md ">
-                <a href="{% url 'home-page' %}" class='tracking-wider p-1 px-5 rounded-md  flex gap-2 items-center {% if request.resolver_match.url_name == 'login-page' %}  bg-sky-200 {% else %} bg-[#D9D9D9] {% endif %}'>
-                    <i class="block fas fa-users"></i>
-                    <span class="text-sm md:font-semibold tracking-wider font-bold capitalize " > Login</span>
-                </a>  
-            </li>
-        </ul>
-    </div> 
-    <script>
-        const menuToggle = document.getElementById('menu-toggle');
-        const menu = document.getElementById('menu-item');
-
-        menuToggle.addEventListener('change', () => {
-            if (menuToggle.checked) {
-                menu.style.display = 'block';
-            } else {
-                menu.style.display = 'none';
-            }
-        });
-    </script>
+<header>
+    <div class="col-head-logo">
+        <img class="header-logo" src="{% static 'logo/logo-full-cropped.png' %}">
+    </div>
+    <div class="col-head-menu">
+        <div class="menu-wrap">
+            <a class="menu-link">Home</a>
+            <a class="menu-link">Restaraunts</a>
+            <a class="menu-link">Login</a>
+        </div>
+    </div>
 </header>
