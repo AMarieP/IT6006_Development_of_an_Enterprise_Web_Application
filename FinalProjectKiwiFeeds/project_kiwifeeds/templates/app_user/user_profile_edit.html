@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Your content here -->
+    <h1>Edit Profile</h1>
+    <form action="." method="POST">
+        {% csrf_token %} 
+        
+        {{form.as_p}}
+        <button type="submit">SUBMIT</button>
+    </form>
+
+
+{% endblock %}
