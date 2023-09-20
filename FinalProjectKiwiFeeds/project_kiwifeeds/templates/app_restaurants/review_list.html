@@ -1,0 +1,20 @@
+{% extends "base.html"%}
+{% block content %}
+
+<h1>Review List</h1>
+
+    {% if review_list %}
+
+    <ul>
+        {% for review in review_list %}
+        <li><h1> {{ review.title}} </h1>
+        <p> {{review.comment}} </p>
+
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p> No reviews available yet</p>
+    {% endif %}
+    
+{% endblock content %}

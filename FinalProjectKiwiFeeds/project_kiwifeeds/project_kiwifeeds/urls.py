@@ -25,10 +25,10 @@ urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
     path('', views.HomeView.as_view() , name='home-page'),
+    path("restaurants/", include("app_restaurants.urls")),
     #app_user URL
     path('', include('app_user.urls') , name='user'),
-
-]
+    ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
