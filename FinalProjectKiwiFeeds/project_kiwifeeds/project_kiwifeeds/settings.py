@@ -38,11 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_restaurant',
+    'app_food',
+    'app_user',
     'debug_toolbar',
     'tailwind',
     'theme',
     'django_browser_reload',
+    'app_restaurants',
+    "phonenumber_field",
+    'app_reviews',
+
 ]
 
 MIDDLEWARE = [
@@ -157,3 +162,7 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+#Login URL redirects for login mixin if not logged on
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home-page'

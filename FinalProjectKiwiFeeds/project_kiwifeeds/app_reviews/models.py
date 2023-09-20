@@ -1,0 +1,22 @@
+from django.db import models
+from django.contrib.auth.models import User
+from django.urls import reverse
+
+
+# Create your models here.
+class Review(models.Model):
+   ONE_TO_FIVE_STAR_RATING_CHOICES = (
+    (1, '1'),
+    (2, '2'),
+    (3, '3'),
+    (4, '4'),
+    (5, '5'),
+   )
+
+   user = models.ForeignKey(User, on_delete=models.PROTECT)
+   restaurant = models.ForeignKey('app_restaurants.Restaurant', on_delete=models.CASCADE)
+   rating = models.IntegerField(choices=ONE_TO_FIVE_STAR_RATING_CHOICES)
+   review = models.TextField()
+
+   def get_absolute_url(self):
+      return reverse('review', kwargs={'pk': self.pk})

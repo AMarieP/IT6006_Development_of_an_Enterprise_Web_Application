@@ -1,0 +1,8 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <h1>{{restaurant.restaurant_name}}</h1>
+    <p>{{restaurant.restaurant_description}}</p>
+    <a href="{% url 'edit-restaurant' restaurant.id %}" >Edit</a>
+
+    {% endblock%}
+

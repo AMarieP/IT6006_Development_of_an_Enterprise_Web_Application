@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Your content here -->
+    <h1>Delete Profile</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete your account?</p>
+        <p>{{thisUser.username}}</p>
+        <input type="submit" value="Delete">
+    </form>
+{% endblock %}

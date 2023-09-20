@@ -24,13 +24,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("__debug__/", include("debug_toolbar.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
-    # path('', views.home , name='home-page'),
     path('', views.HomeView.as_view() , name='home-page'),
-    path('restaraunt-catalog', views.restaraunt_catalog),
-    path('login-signup', views.login_or_signup),
-    path('restaurant-details', views.restaraunt_details),
+    path("restaurants/", include("app_restaurants.urls")),
+    path('', include('app_user.urls') , name='user'),
+    path('', include('app_reviews.urls') , name='reviews'),
+    path('', include('app_food.urls')),
 
-]
+
+    ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
