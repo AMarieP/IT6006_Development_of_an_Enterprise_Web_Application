@@ -1,13 +1,15 @@
 {% load static %}
-<header>
-    <div class="col-head-logo">
-        <img class="header-logo" src="{% static 'logo/logo-full-cropped.png' %}">
-    </div>
-    <div class="col-head-menu">
-        <div class="menu-wrap">
-            <a class="menu-link">Home</a>
-            <a class="menu-link">Restaraunts</a>
-            <a class="menu-link">Login</a>
+<header id="header">
+    <div class="header-wrap">
+        <div class="col-head-logo">
+            <img href="http://127.0.0.1:8000/" class="header-logo" src="{% static 'logo/logo-full-cropped.png' %}">
+        </div>
+        <div class="col-head-menu">
+            <div class="menu-wrap">
+                <a href="http://127.0.0.1:8000/" class="menu-link">Home</a>
+                <a href="/restaraunt-catalog" class="menu-link">Restaraunts</a>
+                <a href="/login-signup" class="menu-link">Login</a>
+            </div>
         </div>
     </div>
 </header>
