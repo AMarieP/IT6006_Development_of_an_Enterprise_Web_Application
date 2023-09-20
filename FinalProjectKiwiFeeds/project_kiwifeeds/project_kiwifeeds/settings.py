@@ -38,12 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app_restaurant',
     'app_user',
     'debug_toolbar',
     'tailwind',
     'theme',
     'django_browser_reload',
+    'app_restaurants',
     "phonenumber_field",
 
 ]
