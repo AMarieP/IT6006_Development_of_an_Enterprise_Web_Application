@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_browser_reload',
     'app_restaurants',
     "phonenumber_field",
+    'app_reviews',
 
 ]
 
