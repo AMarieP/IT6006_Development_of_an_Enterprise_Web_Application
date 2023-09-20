@@ -1,4 +1,4 @@
-
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,12 +15,13 @@
     </style>
    
     
-    
+    {% tailwind_css %}
 </head>
 <body >
 
     <header>
         Header
+        <p class='bg-blue-400'> hi</p>
     </header>
     
 
