@@ -5,6 +5,7 @@ from .models import Review
 
 class CreateReview(CreateView):
     model = Review
+    fields = ['restaurant', 'user', 'rating', 'review']
     template_name ="app_reviews/reviews_createreview.html"
 
 class ReviewDetail(DetailView):
