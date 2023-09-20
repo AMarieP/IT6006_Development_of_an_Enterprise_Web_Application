@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from project_kiwifeeds.app_restaurants.models import Restaurant
 
 
 
@@ -15,6 +14,6 @@ class Review(models.Model):
    )
 
    user = models.ForeignKey(User, on_delete=models.PROTECT)
-   restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+   restaurant = models.ForeignKey('app_restaurants.Restaurant', on_delete=models.CASCADE)
    rating = models.IntegerField(choices=ONE_TO_FIVE_STAR_RATING_CHOICES)
    review = models.TextField()
