@@ -83,7 +83,7 @@ class UserLoginView(LoginView):
         messages.error(self.request,'Invalid username or password')
         return self.render_to_response(self.get_context_data(form=form))
 
-class UserLogoutView(LogoutView):
+class UserLogoutView(LoginRequiredMixin, LogoutView):
     success_url = reverse_lazy('home-page')
     template_name = 'app_user/user_logout.html'
 

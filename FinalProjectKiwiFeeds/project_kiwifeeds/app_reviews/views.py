@@ -13,18 +13,18 @@ class CreateReview(LoginRequiredMixin, CreateView):
     def get_success_url(self, **kwargs):
         return reverse_lazy("review", kwargs={'pk': self.object.pk})
 
-
-class ReviewDetail(DetailView):
-    model = Review
-    template_name ="app_reviews/reviews_editreview.html"
-
 class ReviewList(ListView):
     model = Review
     template_name = "app_reviews/reviews_reviewdetail.html"
 
-class EditReview(LoginRequiredMixin, UpdateView):  
-    model = Review
-    template_name =  "app_reviews/reviews_reviewlist.html"
-    def get_success_url(self, **kwargs):
-        return reverse_lazy("review", kwargs={'pk': self.object.pk})
+#These views are not in current app scope
+# class ReviewDetail(DetailView):
+#     model = Review
+#     template_name ="app_reviews/reviews_editreview.html"
+
+# class EditReview(LoginRequiredMixin, UpdateView):  
+#     model = Review
+#     template_name =  "app_reviews/reviews_reviewlist.html"
+#     def get_success_url(self, **kwargs):
+#         return reverse_lazy("review", kwargs={'pk': self.object.pk})
 
