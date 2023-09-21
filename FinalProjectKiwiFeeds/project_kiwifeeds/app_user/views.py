@@ -39,6 +39,35 @@ class UserCreateView(CreateView):
     # success_url = reverse_lazy('profile-page')
     # template_name = 'app_user/user_signup.html'
 
+#Auto addes the user to group 'ResturantOwner'
+class BusinessUserCreateView(CreateView):
+
+    def get(self, request, *args, **kwargs):
+        context = {'user_form': UserForm(), 'profile_form': ProfileForm()}
+        return render(request, 'app_user/business_signup.html', context)
+
+    def post(self, request, *args, **kwargs):
+        user_form = UserForm(request.POST)
+        profile_form = ProfileForm(request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            #save the User
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            # user_group = Group.objects.get(name='ResturantOwner')
+            # user.groups.add(user_group)
+            #Do not save the profile yet so we can set things as we want
+            profile = profile_form.save(commit=False)
+            profile.this_user = user #This sets the FK to the user we just saved
+            if 'picture' in request.FILES:#sets the pfp
+                profile.profile_picture = request.FILES['picture']
+            profile.save()
+            return HttpResponseRedirect(reverse_lazy('profile-page', kwargs={'pk': profile.pk}))
+        else:
+            print ('user: ', user_form.errors, 'profile: ', profile_form.errors)
+
+        return render(request, 'app_user/business_signup.html', {'user_form': UserForm(), 'profile_form': ProfileForm()})
+
 class UserProfileView(LoginRequiredMixin, DetailView):
     model = UserProfile
     context_object_name = 'this_user'
