@@ -2,6 +2,7 @@
 {% block content %}
     <h1>{{restaurant.restaurant_name}}</h1>
     <p>{{restaurant.restaurant_description}}</p>
+    <a href="{% url 'user:favourite_add' restaurant.id %}">add to favourties</a>
     <a href="{% url 'edit-restaurant' restaurant.id %}" >Edit</a>
 
     {% endblock%}

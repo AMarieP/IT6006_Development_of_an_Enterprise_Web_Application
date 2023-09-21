@@ -11,7 +11,8 @@ urlpatterns = [
     path('user/<int:pk>/logout/', UserLogoutView.as_view(), name='logout'),
     # path('change-password/', UserChangePassword.as_view(), name='change-password'),
     # path('change-success/', UserPasswordChangeDone.as_view(), name='change-success')
-
+    path('fav/<int:id>/', views.favourite_add, name='favourite_add'),
+    path('user/favourites/', views.favourite_list, name='favourite_list'),
 ]
 
 #TO DO: Add profile deleted sucess template as a page

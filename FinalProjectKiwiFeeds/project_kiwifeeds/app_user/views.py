@@ -8,6 +8,7 @@ from .forms import *
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
+from app_restaurants.models import Restaurant
 
 
 #Create a user, render the default User form as well as the UserPrfile odel on One Page
@@ -92,3 +93,17 @@ class UserLogoutView(LogoutView):
 
 # class UserPasswordChangeDone(PasswordChangeDoneView):
 #     template_name = 'user_profilePage.html'
+
+def favourite_add(request, id):
+    post = get_object_or_404(Restaurant, id=id)
+    if post.favourites.filter(id=request.user.id).exists():
+        post.favourites.remove(request.user)
+    else:
+        post.favourites.add(request.user)
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+def favourite_list(request):
+    new = Restaurant.filter(favourites=request.user)
+    return render(request,
+                  'user/favourites.html',
+                  {'new' : new})

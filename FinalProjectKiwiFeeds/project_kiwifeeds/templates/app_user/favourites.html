@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Your content here -->
+    <h1>View favourties</h1>
+    <h2>Name: {{this_user.this_user}}</h2>
+    <ul>
+        {% for restaurant in new %}
+        <a href="{% url 'restaurant-details' restaurant_id=restaurant.id %}">
+
+            <li><h1> {{ restaurant.restaurant_name}} </h1>
+
+        </a>
+        <p> {{restaurant.restaurant_description}} </p>
+        <a href="{% url 'user:favourite_add' restaurant.id %}">remove</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+
+
+{% endblock %}
