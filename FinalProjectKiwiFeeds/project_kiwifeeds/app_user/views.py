@@ -8,9 +8,13 @@ from .forms import *
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import Group
 
 
-#Create a user, render the default User form as well as the UserPrfile odel on One Page
+
+#Create a user, render the default User form as well as the UserProfile Form on One Page
+
+#Auto adds the user to group 'Reviewers'
 class UserCreateView(CreateView):
 
     def get(self, request, *args, **kwargs):
@@ -24,6 +28,8 @@ class UserCreateView(CreateView):
             #save the User
             user = user_form.save()
             user.set_password(user.password)
+            # user_group = Group.objects.get(name='Reviewers')
+            # user.groups.add(user_group)
             user.save()
             #Do not save the profile yet so we can set things as we want
             profile = profile_form.save(commit=False)
@@ -38,6 +44,37 @@ class UserCreateView(CreateView):
         return render(request, 'app_user/user_signup.html', {'user_form': UserForm(), 'profile_form': ProfileForm()})
     # success_url = reverse_lazy('profile-page')
     # template_name = 'app_user/user_signup.html'
+
+#Auto addes the user to group 'ResturantOwner'
+class BusinessUserCreateView(CreateView):
+
+    def get(self, request, *args, **kwargs):
+        context = {'user_form': UserForm(), 'profile_form': ProfileForm()}
+        return render(request, 'app_user/business_signup.html', context)
+
+    def post(self, request, *args, **kwargs):
+        user_form = UserForm(request.POST)
+        profile_form = ProfileForm(request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            #save the User
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            # user_group = Group.objects.get(name='ResturantOwner')
+            # user.groups.add(user_group)
+            #Do not save the profile yet so we can set things as we want
+            profile = profile_form.save(commit=False)
+            profile.this_user = user #This sets the FK to the user we just saved
+            if 'picture' in request.FILES:#sets the pfp
+                profile.profile_picture = request.FILES['picture']
+            profile.save()
+            return HttpResponseRedirect(reverse_lazy('profile-page', kwargs={'pk': profile.pk}))
+        else:
+            print ('user: ', user_form.errors, 'profile: ', profile_form.errors)
+
+        return render(request, 'app_user/business_signup.html', {'user_form': UserForm(), 'profile_form': ProfileForm()})
+
+
 
 class UserProfileView(LoginRequiredMixin, DetailView):
     model = UserProfile
