@@ -13,10 +13,11 @@ class Review(models.Model):
     (5, '5'),
    )
 
+   # user and restaurant will be protected if we delete any review
    user = models.ForeignKey(User, on_delete=models.PROTECT)
-   restaurant = models.ForeignKey('app_restaurants.Restaurant', on_delete=models.CASCADE)
+   restaurant = models.ForeignKey('app_restaurants.Restaurant', on_delete=models.PROTECT)
    rating = models.IntegerField(choices=ONE_TO_FIVE_STAR_RATING_CHOICES)
-   review = models.TextField()
+   comment = models.TextField()
 
    def get_absolute_url(self):
       return reverse('review', kwargs={'pk': self.pk})

@@ -7,7 +7,12 @@ If a user is Logged in and ISNT the resturant owner a button to ass a review sho
 {% block content %}
     <h1>{{restaurant.restaurant_name}}</h1>
     <p>{{restaurant.restaurant_description}}</p>
-    <a href="{% url 'edit-restaurant' restaurant.id %}" >Edit</a>
+    <p> Owner :{{restaurant.restaurant_owner}} </p>
+    <p> Owner Address :{{restaurant.restaurant_owner.address}} </p>
+    <p> Owner Phone:{{restaurant.restaurant_owner.phone_number}} </p>
+    
+    <a href="{% url 'edit-restaurant' restaurant_id=restaurant.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>Edit</a>
+    <a href="{% url 'delete-restaurant' restaurant_id=restaurant.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>DELETE</a>
 
     {% endblock%}
 

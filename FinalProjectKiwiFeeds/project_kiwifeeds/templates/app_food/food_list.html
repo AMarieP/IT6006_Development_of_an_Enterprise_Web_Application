@@ -1,0 +1,32 @@
+<!-- List of All Resturants on Site -->
+{% extends "base/base.html"%}
+{% block content %}
+
+
+
+<h1>Food List</h1>
+<a href="{% url 'add-food' %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>Add Food</a>
+    {% if food_list %}
+
+    <ul class='flex flex-col gap-4'>
+        {% for food in food_list %}
+        <li>
+
+        <h1 class='bg-sky-200 px-4 py-2 flex flex-col'> {{ food.name}} </h1>
+        <h1 class='bg-sky-200 px-4 py-2 flex flex-col'> {{ food.description}} </h1>
+        <h1 class='bg-sky-200 px-4 py-2 flex flex-col'> {{ food.food_picture}} </h1>
+        <h1 class='bg-sky-200 px-4 py-2 flex flex-col'> {{ food.food_price}} </h1>
+        <h1 class='bg-sky-200 px-4 py-2 flex flex-col'> {{ food.restaurant.restaurant_name}} </h1>
+        <h1 class='bg-sky-200 px-4 py-2 flex flex-col'> {{ food.restaurant}} </h1>
+    
+        </li>
+        <a href="{% url 'edit-food' food_id=food.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>Edit</a>
+        <a href="{% url 'delete-food' food_id=food.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>DELETE</a>
+    
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p> Food not available</p>
+    {% endif %}
+    
+{% endblock content %}

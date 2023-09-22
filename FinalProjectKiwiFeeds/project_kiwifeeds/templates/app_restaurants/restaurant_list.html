@@ -2,21 +2,26 @@
 {% extends "base/base.html"%}
 {% block content %}
 
-<h1>Restaurant List</h1>
 
-<a href="{% url 'create-restaurant' %}" >Create Restaurant</a>
+<a href="{% url 'create-restaurant' %}" class='flex flex-row gap-1 justify-start my-10  bg-blue-300 px-2 py-2 rounded-md '>
+Add Restaurant</a>
+<h1>Restaurant List</h1>
 
     {% if restaurant_list %}
 
-    <ul>
+    <ul class='flex flex-col gap-4'>
         {% for restaurant in restaurant_list %}
-        <a href="{% url 'restaurant-details' restaurant_id=restaurant.id %}"  class="">
+        <li>
+        <a  href="{% url 'restaurant-details' restaurant_id=restaurant.id %}"  >
 
-            <li><h1> {{ restaurant.restaurant_name}} </h1>
+        <h1 class='bg-sky-200 px-4 py-2 flex flex-col'> {{ restaurant.restaurant_name}} </h1>
 
         </a>
         <!-- <li><h1> {{ restaurant.restaurant_name}} </h1> -->
         <p> {{restaurant.restaurant_description}} </p>
+      
+        
+        
         
         </li>
         {% endfor %}

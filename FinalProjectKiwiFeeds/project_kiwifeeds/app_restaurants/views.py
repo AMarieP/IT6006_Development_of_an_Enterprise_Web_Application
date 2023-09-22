@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404 ,render
 from django.http import HttpResponse, HttpResponseRedirect
-
+from django.urls import reverse
 from app_restaurants.models import Restaurant
 from app_restaurants.forms import RestaurantForm
 
@@ -18,7 +18,7 @@ def RestaurantCreateView(request):
         form = RestaurantForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect("/restaurants/")
     return render(request,'app_restaurants/create_restaurant.html', {"form": form})
 
 def RestaurantEditView(request, restaurant_id):
@@ -29,11 +29,12 @@ def RestaurantEditView(request, restaurant_id):
         form = RestaurantForm(request.POST,instance=model)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect("/restaurants/")
         else:
             form = RestaurantForm()
     else:
         form = RestaurantForm(instance=model)
+
     return render(request,'app_restaurants/edit_restaurant.html', {"form": form})
 
 def RestaurantDeleteView(request, restaurant_id):
@@ -41,5 +42,5 @@ def RestaurantDeleteView(request, restaurant_id):
     obj = get_object_or_404(Restaurant, id=restaurant_id)
     if request.method =='POST':
         obj.delete()
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect(reverse('restaurant-list'))
     return render(request,'app_restaurants/delete_restaurant.html', {})

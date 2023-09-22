@@ -7,6 +7,5 @@ urlpatterns = [
    path("create/", RestaurantCreateView, name="create-restaurant"),
    path("<int:restaurant_id>/edit/", RestaurantEditView, name="edit-restaurant"),
    path("<int:restaurant_id>/delete/", RestaurantDeleteView, name="delete-restaurant"),
-#    path("reviews/", review_list, name="review-list"),
-#    path("review/<int:review_id>/", review_details, name="review-details"),
+
 ]

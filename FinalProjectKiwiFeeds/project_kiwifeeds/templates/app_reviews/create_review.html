@@ -1,0 +1,16 @@
+<!-- TODO: Authorization so only signed in users can access this view -->
+<!-- Should have a back/ cancel review button taking to homepage and a submit  -->
+
+<!-- List of All Resturants on Site -->
+{% extends "base/base.html"%}
+{% block content %}
+
+
+<h1>Create a Review</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Review</button>
+</form>
+    
+{% endblock content %}

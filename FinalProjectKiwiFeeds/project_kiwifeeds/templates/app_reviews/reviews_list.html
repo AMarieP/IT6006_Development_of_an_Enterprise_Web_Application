@@ -1,0 +1,27 @@
+<!-- List of All Resturants on Site -->
+{% extends "base/base.html"%}
+{% block content %}
+
+
+<a href="{% url 'write-a-review' %}" class='flex flex-row gap-1 justify-start my-10  bg-blue-300 px-2 py-2 rounded-md '>
+Add Review</a>
+<h1>Review List</h1>
+
+    {% if reviews %}
+
+    <ul>
+        {% for review in reviews %}
+            <li>
+                <h2>{{ review.user }}</h2>
+                <p><strong>Rating:</strong> {{ review.rating }}</p>
+                <p>{{ review.review }}</p>
+            </li>
+        {% empty %}
+            <li>No reviews available.</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p> Reviews not available</p>
+    {% endif %}
+    
+{% endblock content %}
