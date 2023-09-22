@@ -26,6 +26,8 @@ def CreateFood(request):
 def EditFood(request,food_id):
     model = Food.objects.get(pk=food_id)
     form = FoodForm()
+  
+   
     if request.method == "POST":
         print(request.POST)
         form=FoodForm(request.POST, instance=model)
@@ -33,7 +35,9 @@ def EditFood(request,food_id):
             form.save()
         else:
             form=FoodForm()
-        return HttpResponseRedirect("/food/")
+        # return HttpResponseRedirect("/food/")
+        # for editing food within restaurant page
+        return HttpResponseRedirect(f"/restaurants/{model.restaurant.id}/edit/")
     else:
         form=FoodForm(instance=model)
 
@@ -41,12 +45,14 @@ def EditFood(request,food_id):
 
 
 def DeleteFood(request,food_id):
-    model = Food
+    model = Food.objects.get(pk=food_id)
     obj = get_object_or_404(Food,id = food_id)
 
     if request.method == "POST":
         obj.delete()
-        return HttpResponseRedirect("/food/")
+        # return HttpResponseRedirect("/food/")
+        # for editing food within restaurant page
+        return HttpResponseRedirect(f"/restaurants/{model.restaurant.id}/edit/")
     return render(request,'app_food/delete_food.html',{'food':model})
 
 

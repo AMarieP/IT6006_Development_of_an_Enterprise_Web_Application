@@ -23,7 +23,8 @@ class UserProfile(models.Model):
     #Address model
 
     def __str__(self):
-        return self.this_user.username
+        # return f'{self.this_user.username} {self.phone_number}'
+        return f'{self.this_user.username} '
     
     def get_absolute_url(self):
         return reverse('profile-page', kwargs={'pk': self.pk})

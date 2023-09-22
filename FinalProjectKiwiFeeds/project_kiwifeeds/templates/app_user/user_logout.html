@@ -4,7 +4,11 @@
 {% block content %}
 
     <!-- Your content here -->
-    <h1>Logout Profile</h1>
-
+    <h1>Logout Confirmation</h1>
+    <p>Are you sure you want to logout?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button class='bg-sky-300 px-4 py-1 my-5' type="submit" class="btn btn-danger">Logout</button>
+    </form>
 
 {% endblock %}
