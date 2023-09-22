@@ -1,8 +1,47 @@
 {% extends 'base/base.html' %}
+{% load static%}
 {% block content %}
-    <h1>{{restaurant.restaurant_name}}</h1>
-    <p>{{restaurant.restaurant_description}}</p>
-    <a href="{% url 'edit-restaurant' restaurant.id %}" >Edit</a>
 
-    {% endblock%}
+<section>
+    <h1 class="r-title">{{restaurant.restaurant_name}}</h1>
+    <div class="info-wrap-details">
+        <div class="res-details-wrap">
+            <div class="icon-text-wrap">
+                <img class="icon" src="{% static 'images/icons/location-pin.png' %}">
+                <a class="r-info-text">{{restaurant.restaurant_location}}</a>
+            </div>
+            <div class="icon-text-wrap">
+                <img class="icon" src="{% static 'images/icons/star.png' %}">
+                <a class="r-info-text">{{r_rating}}</a>
+            </div>
+            <div class="icon-text-wrap">
+                <img class="icon" src="{% static 'images/icons/owner.png' %}">
+                <a class="r-info-text">{{restaurant.restaurant_owner}}</a>
+            </div>
+        </div>
+    </div>
+    <p class="text">{{restaurant.restaurant_description}}</p>
+    </p>
+    <div class="button-wrap">
+        <a href="https://www.google.com/maps/place/{{restaurant.restaurant_location}}" target="_blank"class="btn btn-dark">Get Directions</a>
+        <a href=""class="btn btn-dark">View Menu</a>
+        <a class="btn btn-action" href="{% url 'edit-restaurant' restaurant.id %}" >Edit</a>
+    </div>
+</section>
+<section>
+    <h2>Reviews</h2>
+    <ul>
+        <div class="reviews-wrap">
+            <li>
+                <h3 class="rev-name">{{rev_name}}</h3>
+                <div class="rating-wrap">
+                    <img class="icon" src="{% static 'images/icons/star.png' %}">
+                    <a class="r-info-text">{{rev_rating}}</a>
+                </div>
+                <p class="review-text text">{{rev_review}}</p>
+            </li>
+        </div>
+    </ul>
+</section>
 
+{% endblock %}

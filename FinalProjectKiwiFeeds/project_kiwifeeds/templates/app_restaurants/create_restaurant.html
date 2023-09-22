@@ -1,12 +1,14 @@
 <!-- TODO: Authorization so only user can create if Business Group User -->
 {% extends 'base/base.html' %}
 {% block content %}
+<section>
     <h1>Create New Restaurant</h1>
     <hr>
     <form action="" method="post">
         {% csrf_token %}
         {{form.as_p}}
-        <input type="submit"/>
+        <button class="btn btn-action" type="submit"/>Create Restaraunt</button>
     </form>
+</section>
 {% endblock%}
 

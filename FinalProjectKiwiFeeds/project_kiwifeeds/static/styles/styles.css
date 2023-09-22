@@ -7,6 +7,8 @@
     --c-dark-blue: #283747;
     --c-black: #292929;
     --c-white: #F3F3F3;
+    --t-heading: "wavehaus";
+    --t-paragraph: "oak sans";
 }
 
 /* adding custom fonts */
@@ -108,6 +110,7 @@ p,a{
     border-radius: 90px;
     padding: 10px 50px 10px 50px;
     transition: .1s;
+    text-decoration: none;
 }
 
 .btn:hover{
@@ -135,16 +138,27 @@ p,a{
     color: var(--c-dark-blue);
 }
 
+.btn-action{
+    border-color: var(--c-red);
+    color: var(--c-red);
+}
+
 /* links styles */
 
 .t-link{
     text-decoration: underline dashed;
     color: var(--c-black);
+    transition: .2s;
 }
 
 .t-link:hover{
     text-decoration: underline;
     cursor: pointer;
+}
+
+.t-link:active{
+    color: var(--c-red);
+    transition: .1s;
 }
 
 .t-link-b{
@@ -334,4 +348,55 @@ text-align: center;
 .icon-wrap-text{
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+/* forms styling */
+
+p > label{
+    display: flex;
+    font-size: 20px;
+    max-width: 500px;
+}
+
+input,select{
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    border: dashed 2px;
+    border-radius: 90px;
+    width: 100%;
+    min-width: 300px;
+    max-width: 500px;
+    font-family: var(--t-paragraph);
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--c-dark-blue);
+    padding: 12px;
+    background-color: var(--c-white);
+    transition: .2s;
+}
+
+select{
+    max-width: 50px;
+}
+
+input:hover{
+    border: solid 2px var(--c-dark-blue);
+}
+
+select:hover{
+    border: solid 2px var(--c-dark-blue);
+}
+
+input:focus-visible{
+    border: solid 2px var(--c-red);
+    outline-color: var(--c-red);
+    transform: scale(1.02);
+    transition: .1s;
+    color: var(--c-red);
+    font-weight: 700;
+}
+
+.helptext{
+    margin-left: 20px;
 }
