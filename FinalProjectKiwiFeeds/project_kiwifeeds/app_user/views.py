@@ -28,8 +28,8 @@ class UserCreateView(CreateView):
             #save the User
             user = user_form.save()
             user.set_password(user.password)
-            # user_group = Group.objects.get(name='Reviewers')
-            # user.groups.add(user_group)
+            user_group = Group.objects.get(name='Customer')
+            user.groups.add(user_group)
             user.save()
             #Do not save the profile yet so we can set things as we want
             profile = profile_form.save(commit=False)
@@ -42,7 +42,7 @@ class UserCreateView(CreateView):
             print ('user: ', user_form.errors, 'profile: ', profile_form.errors)
 
         return render(request, 'app_user/user_signup.html', {'user_form': UserForm(), 'profile_form': ProfileForm()})
-    # success_url = reverse_lazy('profile-page')
+    success_url = reverse_lazy('profile-page')
     # template_name = 'app_user/user_signup.html'
 
 #Auto addes the user to group 'ResturantOwner'
@@ -60,8 +60,8 @@ class BusinessUserCreateView(CreateView):
             user = user_form.save()
             user.set_password(user.password)
             user.save()
-            # user_group = Group.objects.get(name='ResturantOwner')
-            # user.groups.add(user_group)
+            user_group = Group.objects.get(name='RestaurantOwner')
+            user.groups.add(user_group)
             #Do not save the profile yet so we can set things as we want
             profile = profile_form.save(commit=False)
             profile.this_user = user #This sets the FK to the user we just saved
@@ -81,6 +81,10 @@ class UserProfileView(LoginRequiredMixin, DetailView):
     context_object_name = 'this_user'
     fields = ['profile_picture', 'phone_number', 'address']
     template_name = 'app_user/user_profile_page.html'
+    
+    def get_object(self, queryset=None):
+        # Return the currently logged-in user's profile
+        return self.request.user.userprofile
 
 class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = UserProfile
@@ -111,7 +115,7 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
 
 class UserLoginView(LoginView):
     redirect_authenticated_user = True
-    success_url = reverse_lazy('home-page')
+    success_url = reverse_lazy('profile-page')
     template_name = 'app_user/user_login.html'
     
     #Error Message, rerender login form

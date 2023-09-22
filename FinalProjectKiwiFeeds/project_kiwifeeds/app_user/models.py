@@ -11,7 +11,7 @@ def generate_image_path(instance,filename):
 
 class UserProfile(models.Model):
     # user will be protected if we delete user profile
-    this_user = models.OneToOneField(User, on_delete=models.PROTECT)
+    this_user = models.OneToOneField(User, on_delete=models.PROTECT ,verbose_name='User')
     profile_picture = models.ImageField(
         default='/profile_pics/temp_pfp_placeholder_REPLACE_LATER.avif',
         upload_to=generate_image_path,  
@@ -20,6 +20,12 @@ class UserProfile(models.Model):
     )
     phone_number = PhoneNumberField()
     address = models.CharField(max_length=1000)
+
+    @property
+    def user_group(self):
+        groups = self.this_user.groups.all()
+        return ', '.join([group.name for group in groups])
+
     #Address model
 
     def __str__(self):

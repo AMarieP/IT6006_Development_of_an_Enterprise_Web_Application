@@ -1,3 +1,4 @@
+{% comment %} {% load messages %} {% endcomment %}
 {% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
@@ -6,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     {% load static %}
+    
     
     <link href="{% static 'css/tailwind.css' %}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -18,20 +20,21 @@
     {% tailwind_css %}
 </head>
 <body >
-
-    <header class='flex flex-row gap-3 my-4'>
-        User page Url
-        <a class='bg-sky-400 py-2 px-5 rounded-md' href="{% url 'signup' %}">Sign Up</a>
-        <a class='bg-sky-400 py-2 px-5 rounded-md' href="{% url 'signup-business' %}">Sign Up for Business</a>
-        <a href="{% url 'profile-page' pk=1 %}">Profile Page</a>
-        {% comment %} <a href="{% url 'delete-account' user_profile.pk %}">Delete Account</a> {% endcomment %}
-        {% comment %} <a href="{% url 'edit-profile' user_profile.pk %}">Edit Profile</a>  {% endcomment %}
-        <a class='bg-sky-400 py-2 px-5 rounded-md' href="{% url 'login' %}">Login</a>
-       
-
+    {% comment %} {% messages %} {% endcomment %}
+    {% if user.is_authenticated %}
+    <p class='my-4'>Welcome, {{ request.user.username }}!</p>
+    <a class='bg-sky-400 py-2 px-5 rounded-md my-5' href="{% url 'profile-page' pk=1 %}">Profile Page</a>
+    <a href="{% url 'logout' %}" class="bg-red-400 px-3 py-1 rounded-md text-white">Log Out</a>
+    <!-- Other content for authenticated users -->
+{% else %}
+    <p class='my-4'>You are not logged in.</p>
+    <a class='bg-sky-400 py-2 px-5 rounded-md my-5' href="{% url 'login' %}">Login</a>
+    <a class='bg-sky-400 py-2 px-5 rounded-md' href="{% url 'signup' %}">Sign Up</a>
+    <a class='bg-sky-400 py-2 px-5 rounded-md' href="{% url 'signup-business' %}">Sign Up for Business</a>
         
-
-    </header>
+    <!-- Content for non-authenticated users -->
+{% endif %}
+   
     <header class='flex flex-row gap-3 my-4'>
         Restaurants Url
         <a class='bg-sky-400 py-2 px-5 rounded-md' href="{% url 'restaurant-list' %}">Restaurants List </a>
@@ -46,12 +49,13 @@
   
     </header>
     <header class='flex flex-row gap-3 my-4'>
-        Food Url
-        <a class='bg-sky-400 py-2 px-5 rounded-md' href="{% url 'view-food' %}">Food List </a>
-        <a class='bg-sky-400 py-2 px-5 rounded-md' href="{% url 'add-food' %}">Create Food </a>
-       
-  
-    </header>
+    Review Url
+    {% comment %} {% if user.has_perm('app_reviews.add_review') %} {% endcomment %}
+        <a class='bg-sky-400 py-2 px-5 rounded-md' href="{% url 'write-a-review' %}">Create Review </a>
+    {% comment %} {% if user.has_perm('app_reviews.view_review') %} {% endcomment %}
+        <a class='bg-sky-400 py-2 px-5 rounded-md' href="{% url 'review-list' %}">Review List </a>
+    {% comment %} {% endif %} {% endcomment %}
+</header>
   
     
 
