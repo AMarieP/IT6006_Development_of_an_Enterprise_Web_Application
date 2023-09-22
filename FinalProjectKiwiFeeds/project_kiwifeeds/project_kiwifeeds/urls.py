@@ -29,6 +29,7 @@ urlpatterns = [
     path('', include('app_user.urls') , name='user'),
     path('', include('app_reviews.urls') , name='reviews'),
     path('', include('app_food.urls')),
+    path('', include('app_favorites.urls')),
 
 
     ]

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>My Favorite Restaurants</h1>
+
+<ul>
+    {% for favorite in user.fav_user.all %}
+        <li>{{ favorite.restaurant.name }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
