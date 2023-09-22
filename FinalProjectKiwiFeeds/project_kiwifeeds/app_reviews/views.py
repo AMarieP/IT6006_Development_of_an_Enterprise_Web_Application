@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib import messages
 from django.shortcuts import redirect
 
-class CreateReview(LoginRequiredMixin, CreateView):
+class CreateReview(LoginRequiredMixin,PermissionRequiredMixin, CreateView):
     model = Review
     template_name ="app_reviews/create_review.html"
     success_url = reverse_lazy('review-list')
