@@ -20,8 +20,8 @@
       <ul>
         {% for food_item in restaurant.food_set.all %}
           <li>{{ food_item.name }} - {{ food_item.food_price }}</li>
-          <a href="{% url 'edit-food' food_id=food_item.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>Edit</a>
-        <a href="{% url 'delete-food' food_id=food_item.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>DELETE</a>
+            <a href="{% url 'edit-food' food_id=food_item.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>Edit</a>
+            <a href="{% url 'delete-food' food_id=food_item.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>DELETE</a>
         {% empty %}
           <li>No food items added yet.</li>
         {% endfor %}
