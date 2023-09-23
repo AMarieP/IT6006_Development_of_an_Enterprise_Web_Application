@@ -42,7 +42,24 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        screens: {
+            'mobile': '420px',
+            'tablet': '768px',
+            'notebook': '1080px',
+            'desctop': '1440px',
+        },
+        colors:{
+            transparent: 'transparent',
+            red: '#DE354C',
+            dark_red: '#932432',
+            blue: '#3C1874',
+            dark_blue: '#283747',
+            black: '#292929',
+            white: '#F3F3F3',
+        },
+        extend: {
+            
+        },
     },
     plugins: [
         /**

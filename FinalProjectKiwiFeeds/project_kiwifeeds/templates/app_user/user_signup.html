@@ -4,7 +4,7 @@
 {% block content %}
 
     <!-- Your content here -->
-    <h1>Sign Up Customer Profile</h1>
+    {% comment %} <h1>Sign Up Customer Profile</h1>
     <form action="." method="POST">
         {% csrf_token %}
 
@@ -40,9 +40,18 @@
         </div>
         <!-- {{user_form.as_p}}
         {{profile_form.as_p}} -->
-        <button type="submit">SUBMIT</button>
+        <button type="submit">SUBMIT</button> {% endcomment %}
+    <section>
+        <h1>Sign Up Profile</h1>
+        <form action="." method="POST">
+            {% csrf_token %} 
 
-    </form>
+            {{user_form.as_p}}
+            {{profile_form.as_p}}
+            <button class="btn btn-action" type="submit">Submit</button>
+
+        </form>
+    </section>
 
 
 {% endblock %}

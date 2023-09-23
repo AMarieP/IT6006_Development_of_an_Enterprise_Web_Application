@@ -8,19 +8,23 @@
     <title></title>
     {% load static %}
     
-    
-    <link href="{% static 'css/tailwind.css' %}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    {% comment %} <link href="{% static 'css/tailwind.css' %}" rel="stylesheet" /> {% endcomment %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/styles.css' %}">
+    <!--- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> /-->
 
     <style>
         /* Add your CSS styles here */
     </style>
    
     
-    {% tailwind_css %}
+    <!--- {% tailwind_css %} /-->
 </head>
-<body >
-    {% comment %} {% messages %} {% endcomment %}
+
+
+
+{% comment %}     
+    <!--Vijendra Code for reference-->
+    <!-- {% messages %} -->
     {% if user.is_authenticated %}
     <p class='my-4'>Welcome, {{ request.user.username }}!</p>
     <a class='bg-sky-400 py-2 px-5 rounded-md my-5' href="{% url 'profile-page' pk=1 %}">Profile Page</a>
@@ -49,28 +53,33 @@
   
     </header>
     <header class='flex flex-row gap-3 my-4'>
-    Review Url
-    {% comment %} {% if user.has_perm('app_reviews.add_review') %} {% endcomment %}
-        <a class='bg-sky-400 py-2 px-5 rounded-md' href="{% url 'write-a-review' %}">Create Review </a>
-    {% comment %} {% if user.has_perm('app_reviews.view_review') %} {% endcomment %}
-        <a class='bg-sky-400 py-2 px-5 rounded-md' href="{% url 'review-list' %}">Review List </a>
-    {% comment %} {% endif %} {% endcomment %}
-</header>
-  
+        Review Url
+        <!-- {% if user.has_perm('app_reviews.add_review') %} 
+            <a class='bg-sky-400 py-2 px-5 rounded-md' href="{% url 'write-a-review' %}">Create Review </a>
+        {% if user.has_perm('app_reviews.view_review') %} 
+            <a class='bg-sky-400 py-2 px-5 rounded-md' href="{% url 'review-list' %}">Review List </a>
+        {% endif %} 
+        -->
+    </header> {% endcomment %}
+
+
+
+<body>
+    {% include "components/header.html" %}
+    
+    
     
 
-    <main >
+ 
      
         <!-- Add main content here -->
         {% block content %}
         {% endblock %}
-    </main>
+
 
         <!-- Add footer content here -->
 
-    <footer >
-        Footer
-    </footer>
+    {% include "components/footer.html" %}
     
 </body>
 </html>
