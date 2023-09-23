@@ -14,8 +14,8 @@ class Review(models.Model):
    )
 
    # user and restaurant will be protected if we delete any review
-   user = models.ForeignKey('app_user.UserProfile', on_delete=models.PROTECT)
-   restaurant = models.ForeignKey('app_restaurants.Restaurant', on_delete=models.PROTECT)
+   user = models.ForeignKey('app_user.UserProfile', on_delete=models.PROTECT,related_name='reviews' )
+   restaurant = models.ForeignKey('app_restaurants.Restaurant', on_delete=models.PROTECT,related_name='reviews')
    rating = models.IntegerField(choices=ONE_TO_FIVE_STAR_RATING_CHOICES)
    comment = models.TextField()
 

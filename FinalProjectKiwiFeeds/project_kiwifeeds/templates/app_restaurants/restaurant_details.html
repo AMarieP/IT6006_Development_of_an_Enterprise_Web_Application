@@ -43,6 +43,29 @@ If a user is Logged in and ISNT the resturant owner a button to ass a review sho
 </section>
 <section>
     <h2>Reviews</h2>
+    
+    <ul>
+     
+        {% for review in reviews %}
+            <ul>
+                <div class="reviews-wrap">
+                    <li>
+                        <h3 class="rev-name">{{ review.user.this_user.username|title }}</h3>
+                        <div class="rating-wrap">
+                            {% for _ in "x"|ljust:review.rating %}
+                                <img class="icon" src="{% static 'images/icons/star.png' %}">
+                            {% endfor %}
+                            {% comment %} <a class="r-info-text">{{ review.rating }}</a> {% endcomment %}
+                        </div>
+                        <p class="review-text text">{{ review.comment }}</p>
+                    </li>
+                </div>
+            </ul>
+        {% empty %}
+            <p>No reviews available for this restaurant.</p>
+        {% endfor %}
+    </ul>
+
     <ul>
         <div class="reviews-wrap">
             <li>

@@ -10,9 +10,19 @@ def restaurant_list(request):
     return render(request,'app_restaurants/restaurant_list.html',{"restaurant_list" : model})
 
 def restaurant_details(request, restaurant_id):
-    model = Restaurant.objects.get(pk=restaurant_id)
-    return render(request, 'app_restaurants/restaurant_details.html',{"restaurant": model})
+    # model = Restaurant.objects.get(pk=restaurant_id)
 
+    # Retrieve the restaurant object or return a 404 error if it doesn't exist
+    restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
+    # Retrieve the associated reviews for the restaurant
+    reviews = restaurant.reviews.all()
+    print(reviews)
+    context = {
+        "restaurant": restaurant,
+        "reviews": reviews  # Pass the reviews queryset to the context
+    }
+
+    return render(request, 'app_restaurants/restaurant_details.html', context)
 def RestaurantCreateView(request):
     form=RestaurantForm()
     if request.method == 'POST':
@@ -23,20 +33,20 @@ def RestaurantCreateView(request):
     return render(request,'app_restaurants/create_restaurant.html', {"form": form})
 
 # def RestaurantEditView(request, restaurant_id):
-    model = Restaurant.objects.get(pk=restaurant_id)
-    form = RestaurantForm()
-    if request.method =='POST':
-        print(request.POST)
-        form = RestaurantForm(request.POST,instance=model)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect("/restaurants/")
-        else:
-            form = RestaurantForm()
-    else:
-        form = RestaurantForm(instance=model)
+#     model = Restaurant.objects.get(pk=restaurant_id)
+#     form = RestaurantForm()
+#     if request.method =='POST':
+#         print(request.POST)
+#         form = RestaurantForm(request.POST,instance=model)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect("/restaurants/")
+#         else:
+#             form = RestaurantForm()
+#     else:
+#         form = RestaurantForm(instance=model)
 
-    return render(request,'app_restaurants/edit_restaurant.html', {"form": form})
+#     return render(request,'app_restaurants/edit_restaurant.html', {"form": form})
 
 
 def RestaurantEditView(request, restaurant_id):
