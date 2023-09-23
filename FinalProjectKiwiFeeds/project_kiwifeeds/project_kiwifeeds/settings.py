@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'app_restaurants',
     "phonenumber_field",
     'app_reviews',
-    'app_favorites'
+    'app_favorites',
 
 ]
 

@@ -40,6 +40,32 @@ If a user is Logged in and ISNT the resturant owner a button to ass a review sho
         <a href=""class="btn btn-dark">View Menu</a>
         <a class="btn btn-action" href="{% url 'edit-restaurant' restaurant.id %}" >Edit</a>
     </div>
+    {% if user.is_authenticated and not restaurant.restaurant_owner == user.userprofile %}
+        {% comment %} <form method="post" action="{% url 'add-to-favorites' %}">
+            {% csrf_token %}
+            <input type="hidden" name="restaurant_id" value="{{ restaurant.id }}">
+            <button type="submit" class="btn btn-action">Add to Favorites</button>
+        </form> {% endcomment %}
+        
+            {% if not restaurant.restaurant_owner == user.userprofile %}
+                {% if is_favorite %}
+                    <form method="post" action="{% url 'remove-from-favorites' restaurant.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-action">Remove from Favorites</button>
+                    </form>
+                    
+                {% else %}
+                    <form method="post" action="{% url 'add-to-favorites' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="restaurant_id" value="{{ restaurant.id }}">
+                        <button type="submit" class="btn btn-action">Add to Favorites</button>
+                    </form>
+                {% endif %}
+            {% endif %}
+    
+    {% else %}
+        <p> logged in user is resturant onwer</P>
+    {% endif %}
 </section>
 <section>
     <h2>Reviews</h2>
@@ -78,6 +104,7 @@ If a user is Logged in and ISNT the resturant owner a button to ass a review sho
             </li>
         </div>
     </ul>
+   
 </section>
 
 {% endblock %}

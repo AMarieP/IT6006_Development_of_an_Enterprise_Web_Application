@@ -4,6 +4,7 @@ from django.urls import reverse
 from app_restaurants.models import Restaurant
 from app_restaurants.forms import RestaurantForm
 from app_food.forms import FoodForm
+from app_favorites.models import Favorites
 
 def restaurant_list(request):
     model = Restaurant.objects.all()
@@ -16,10 +17,19 @@ def restaurant_details(request, restaurant_id):
     restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
     # Retrieve the associated reviews for the restaurant
     reviews = restaurant.reviews.all()
-    print(reviews)
+    # print(reviews)
+    is_favorite = False
+
+    if request.user.is_authenticated:
+        user_profile = request.user.userprofile
+        # Check if the restaurant is in the user's favorites
+        is_favorite = Favorites.objects.filter(user=user_profile, restaurant=restaurant).exists()
+    # print('fav-restaurant')
+    # print(is_favorite)
     context = {
         "restaurant": restaurant,
-        "reviews": reviews  # Pass the reviews queryset to the context
+        "reviews": reviews,  # Pass the reviews queryset to the context
+         'is_favorite': is_favorite,
     }
 
     return render(request, 'app_restaurants/restaurant_details.html', context)
