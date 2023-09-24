@@ -47,8 +47,15 @@ def RestaurantCreateView(request):
     if request.method == 'POST':
         form = RestaurantForm(request.POST)
         if form.is_valid():
+            # Set the restaurant owner field to the currently logged-in user
+            form.instance.restaurant_owner = request.user.userprofile  # Assuming user's profile is stored in 'UserProfile' field
+
             form.save()
             return HttpResponseRedirect("/restaurants/")
+    else:
+        # If the request method is not POST, create an empty form with the initial owner
+        form = RestaurantForm(initial={'restaurant_owner': request.user.userprofile})  # Assuming user's profile is stored in 'UserProfile' field
+
     return render(request,'app_restaurants/create_restaurant.html', {"form": form})
 
 # def RestaurantEditView(request, restaurant_id):
