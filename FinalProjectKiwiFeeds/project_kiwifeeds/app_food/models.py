@@ -1,6 +1,7 @@
 from django.db import models
 import os
 from django.utils.text import slugify
+from django.urls import reverse
 
 # Create your models here.
 def get_food_image_upload_path(instance, filename):
@@ -14,7 +15,7 @@ class Food(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=300)
     food_price = models.DecimalField(max_digits=5, decimal_places=2)
-    restaurant = models.ForeignKey('app_restaurants.Restaurant', on_delete=models.PROTECT)
+    restaurant = models.ForeignKey('app_restaurants.Restaurant', on_delete=models.PROTECT,related_name='food')
     
     
     food_picture = models.ImageField(
@@ -28,4 +29,6 @@ class Food(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    def get_absolute_url(self):
+      return reverse('food', kwargs={'pk': self.pk})
 

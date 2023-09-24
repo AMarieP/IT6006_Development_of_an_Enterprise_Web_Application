@@ -5,7 +5,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
-
+from django.contrib import messages
+from app_restaurants.models import Restaurant
 from .forms import FoodForm
 # Create your views here.
 #TODO: View Food List View Does Not Exist
@@ -19,16 +20,31 @@ class FoodCreateView(CreateView):
     model = Food
     form_class = FoodForm
     template_name = 'app_food/create_food.html'
-  
-    # success_url = reverse_lazy('restaurant-list')
-    def get_success_url(self):
-        # Retrieve the restaurant_id from the URL parameters
+    raise_exception = True
+    def get_initial(self):
+        # Get the restaurant instance based on the URL parameter
         restaurant_id = self.kwargs['restaurant_id']
-        
-        # Construct the success URL with the restaurant_id
-        return reverse_lazy('restaurant-details', kwargs={'restaurant_id': restaurant_id})
+        restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
 
-
+        # Set initial values for user and restaurant fields
+        initial = super().get_initial()
+        # initial['user'] = self.request.user.userprofile  # Assuming user's profile is stored in 'UserProfile' field
+        initial['restaurant'] = restaurant
+        # print(initial['user'])
+        print(initial['restaurant'] )
+        return initial
+    # success_url = reverse_lazy('restaurant-list')
+    
+    def form_valid(self, form):
+        # Save the form and handle success
+        response = super().form_valid(form)
+        messages.success(self.request, "Review submitted successfully.")
+        return response
+    def get_success_url(self):
+        # Use reverse_lazy with arguments to generate the success URL
+        restaurant_id = self.kwargs['restaurant_id']
+        return reverse_lazy('restaurant-details', args=[self.kwargs['restaurant_id']])
+    
 
 
 

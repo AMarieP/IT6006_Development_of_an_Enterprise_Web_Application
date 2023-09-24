@@ -21,8 +21,9 @@ def restaurant_details(request, restaurant_id):
     reviews = restaurant.reviews.all()
      # Calculate the overall rating using Avg
     overall_rating = Review.objects.filter(restaurant=restaurant).aggregate(Avg('rating'))['rating__avg']
-
+    foods=restaurant.food.all()
     # print(reviews)
+    # print(foods)
     is_favorite = False
 
     if request.user.is_authenticated:
@@ -36,6 +37,7 @@ def restaurant_details(request, restaurant_id):
         "reviews": reviews,  # Pass the reviews queryset to the context
          'is_favorite': is_favorite,
          'overall_rating': overall_rating,
+         'foods':foods
     }
 
     return render(request, 'app_restaurants/restaurant_details.html', context)

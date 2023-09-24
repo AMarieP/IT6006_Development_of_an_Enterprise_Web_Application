@@ -37,6 +37,7 @@ class UserCreateView(CreateView):
             if 'picture' in request.FILES:#sets the pfp
                 profile.profile_picture = request.FILES['picture']
             profile.save()
+            print("new customer user cerated ")
             return HttpResponseRedirect(reverse_lazy('profile-page', kwargs={'pk': profile.pk}))
         else:
             print ('user: ', user_form.errors, 'profile: ', profile_form.errors)
