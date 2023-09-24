@@ -5,6 +5,7 @@ If a user is Logged in and ISNT the resturant owner a button to ass a review sho
 
 {% extends 'base/base.html' %}
 {% load static%}
+
 {% load custom_tags %}
 {% block content %}
     {% comment %} <h1>{{restaurant.restaurant_name}}</h1>
@@ -45,7 +46,7 @@ If a user is Logged in and ISNT the resturant owner a button to ass a review sho
     </p>
     <div class="button-wrap">
         <a href="https://www.google.com/maps/place/{{restaurant.restaurant_location}}" target="_blank"class="btn btn-dark">Get Directions</a>
-        <a href=""class="btn btn-dark">View Menu</a>
+        {% comment %} <a href=""class="btn btn-dark">View Menu</a> {% endcomment %}
         {% if user.is_authenticated and user|user_belongs_to_group:'RestaurantOwner' %}
             {% if restaurant.restaurant_owner == user.userprofile %}
                 <a class="btn btn-action" href="{% url 'edit-restaurant' restaurant.id %}" >Edit</a>
@@ -78,15 +79,26 @@ If a user is Logged in and ISNT the resturant owner a button to ass a review sho
         {% endif %}
         
     {% endif %}
+    
 </section>
-{% if reviews %}
-    <p>Overall Rating:</p>
-    <div class="rating-wrap">
-        {% for _ in "x"|ljust:overall_rating %}
-            <img class="icon" src="{% static 'images/icons/star.png' %}">
-        {% endfor %}
-    </div>
-{% endif %}
+<section>
+    <h2>Food Items</h2>
+    <ul>
+      {% for food_item in restaurant.food_set.all %}
+      {{food_item.food_picture}}
+      Rest ID:{{food_item.restaurant.id }}
+      Food ID:{{food_item.id}}
+        <img class="header-logo" src="{{food_item.food_picture.url}}">
+        <li>{{ food_item.name }} - {{ food_item.food_price }}</li>
+          <a href="{% url 'edit-food' food_id=food_item.id %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>Edit</a>
+
+          <a href="{% url 'delete-food' food_id=food_item.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>DELETE</a>
+      {% empty %}
+        <li>No food items added yet.</li>
+      {% endfor %}
+    </ul>
+    <a href="{% url 'add-food' restaurant_id=restaurant.id %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>add more food item</a>
+</section>
 <section>
     <h2>Reviews</h2>
     

@@ -7,16 +7,16 @@
     <form method="post">
         {% csrf_token %}
         {{ restaurant_form.as_p }}
-        <button type="submit" name="edit_restaurant_form">Save Restaurant</button>
+        <button class="btn btn-action" type="submit" name="edit_restaurant_form">Save Restaurant</button>
       </form>
       
-      <h2>Add Food Item</h2>
+      {% comment %} <h2>Add Food Item</h2>
       <form method="post">
         {% csrf_token %}
         {{ food_form.as_p }}
         <button type="submit" name="add_food_form">Add Food</button>
-      </form>
-      
+      </form> {% endcomment %}
+{% comment %}       
       <h2>Food Items</h2>
       <ul>
         {% for food_item in restaurant.food_set.all %}
@@ -26,16 +26,15 @@
         {% empty %}
           <li>No food items added yet.</li>
         {% endfor %}
-      </ul>
-      
+      </ul> {% endcomment %}
+ 
 
-
-    <hr>
+    {% comment %} <hr>
     <form action="" method="post">
         {% csrf_token %}
         {{form.as_p}}
         <button class="btn btn-action" type="submit">Update Restaraunt Details</button>
-    </form>
+    </form> {% endcomment %}
 </section>
 {% endblock%}
 

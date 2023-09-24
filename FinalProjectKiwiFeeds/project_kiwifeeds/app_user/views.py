@@ -90,7 +90,7 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = UserProfile
     fields = ['profile_picture', 'phone_number', 'address']
     template_name = 'app_user/user_profile_edit.html'
-#Need to add sort of mixin to test if logged in user is same as profile
+    #Need to add sort of mixin to test if logged in user is same as profile
     #Redirects back to User's pfp
     def get_success_url(self, **kwargs):
         return reverse_lazy("profile-page", kwargs={'pk': self.object.pk})

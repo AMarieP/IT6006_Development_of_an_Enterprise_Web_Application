@@ -144,6 +144,11 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Create the MEDIA_ROOT directory if it doesn't exist
+os.makedirs(MEDIA_ROOT, exist_ok=True)
+
+# Set appropriate permissions for the MEDIA_ROOT directory
+os.chmod(MEDIA_ROOT, 0o755)  # Read-w
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
