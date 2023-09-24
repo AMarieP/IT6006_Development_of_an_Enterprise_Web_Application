@@ -5,32 +5,9 @@
 <section>
     <h1>All Restaraunts</h1>
 
-    {% if restaurant_list %}
-
-    <ul class='flex flex-col gap-4'>
-        {% for restaurant in restaurant_list %}
-        <div class="list-wrap">
-            <li>
-                <h2 class="r-title">{{ restaurant.restaurant_name}}</h2>
-                <div class="info-wrap-list">
-                    <img class="icon" src="{% static 'images/icons/location-pin.png' %}">
-                    <a href="https://www.google.com/maps/place/{{restaurant.restaurant_location}}" target="_blank" class="t-link r-info-text">{{restaurant.restaurant_location}}</a>
-                    <img class="icon" src="{% static 'images/icons/star.png' %}">
-                    <a class="t-link r-info-text">{{r_rating}}</a>
-                </div>
-                <p class="text">{{restaurant.restaurant_description}}</p>
-                </p>
-                <div class="button-wrap">
-                    <a href="{% url 'restaurant-details' restaurant_id=restaurant.id %}" class="btn btn-dark">View Details</a>
-                </div>
-            </li>
-        </div>
-        {% endfor %}
-    </ul>
-
-    {% else %}
-    <p> Restaurant not available</p>
-    {% endif %}
+    {% with restaurant_list=restaurant_list %}
+            {% include 'components/restaurant_list_card.html' %}
+    {% endwith %}
 
 </section>
 

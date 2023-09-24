@@ -4,6 +4,7 @@ from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
 import os
 
+
 def generate_image_path(instance,filename):
         user_id = instance.id
         # Construct the upload path: 'profile_pics/user_id/filename'

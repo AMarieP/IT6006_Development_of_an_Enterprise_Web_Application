@@ -5,6 +5,8 @@ from app_restaurants.models import Restaurant
 from app_restaurants.forms import RestaurantForm
 from app_food.forms import FoodForm
 from app_favorites.models import Favorites
+from app_reviews.models import Review
+from django.db.models import Avg
 
 def restaurant_list(request):
     model = Restaurant.objects.all()
@@ -17,6 +19,9 @@ def restaurant_details(request, restaurant_id):
     restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
     # Retrieve the associated reviews for the restaurant
     reviews = restaurant.reviews.all()
+     # Calculate the overall rating using Avg
+    overall_rating = Review.objects.filter(restaurant=restaurant).aggregate(Avg('rating'))['rating__avg']
+
     # print(reviews)
     is_favorite = False
 
@@ -30,6 +35,7 @@ def restaurant_details(request, restaurant_id):
         "restaurant": restaurant,
         "reviews": reviews,  # Pass the reviews queryset to the context
          'is_favorite': is_favorite,
+         'overall_rating': overall_rating,
     }
 
     return render(request, 'app_restaurants/restaurant_details.html', context)

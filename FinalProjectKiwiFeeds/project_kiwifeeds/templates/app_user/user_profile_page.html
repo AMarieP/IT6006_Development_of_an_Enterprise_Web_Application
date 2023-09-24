@@ -3,6 +3,7 @@
 
 {% extends 'base/base.html' %}
 {% load static %}
+{% load custom_tags %}
 {% block content %}
 
     <!-- Your content here -->
@@ -13,6 +14,14 @@
         <p>Group: {{this_user.user_group}}</p>
         <a class='bg-sky-200 px-4 py-2 my-15' href="{% url 'logout'  %}">Logout</a>
     </p>
+    {% if user|user_belongs_to_group:'RestaurantOwner' %}
+        <p>Restaurant List of Owner  </p>
+
+        {% with restaurant_list=this_user.restaurant_owner_user.all %}
+            {% include 'components/restaurant_list_card.html' %}
+        {% endwith %}
 
 
+        <a href="{% url 'create-restaurant' %}" class="btn btn-dark">Add New Restaurant</a>
+    {% endif %}
 {% endblock %}
