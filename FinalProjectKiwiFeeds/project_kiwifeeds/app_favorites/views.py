@@ -8,31 +8,6 @@ from .models import Favorites
 from app_favorites.forms import FavoriteForm
 
 
-# @login_required
-# def add_favorite(request, restaurant_id):
-#     restaurant = get_object_or_404(Restaurant, id=restaurant_id)
-    
-    
-#     if not Favorites.objects.filter(user=request.user, restaurant=restaurant).exists():
-#         Favorites.objects.create(user=request.user, restaurant=restaurant)
-#     context={
-
-#     }
-#     return redirect('restaurant_detail', context)  
-
-# @login_required
-# def remove_favorite(request, restaurant_id):
-#     restaurant = get_object_or_404(Restaurant, id=restaurant_id)
-#     favorite = Favorites.objects.filter(user=request.user, restaurant=restaurant).first()
-    
-#     if favorite:
-#         favorite.delete()
-#     context={
-
-#     }
-    
-#     # return redirect('restaurant_detail', restaurant_id=restaurant_id)  
-#     return redirect('restaurant_detail', context)  
 
 
 def add_to_favorites(request):
@@ -70,9 +45,10 @@ def display_favorites(request):
     user_profile = request.user.userprofile
     # with related name get all favorites restaurants from app_Favorite
     fav_restaurants = Favorites.objects.filter(user=user_profile)
-
+    restaurants_list = [favorite.restaurant for favorite in fav_restaurants]
     context={
         "user_profile":user_profile,
         'fav_restaurants':fav_restaurants,
+        'restaurants_list':restaurants_list
     }
     return render(request, 'app_favorites/favorites.html', context)

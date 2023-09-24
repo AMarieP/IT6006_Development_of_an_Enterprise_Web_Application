@@ -39,6 +39,7 @@ def restaurant_details(request, restaurant_id):
     }
 
     return render(request, 'app_restaurants/restaurant_details.html', context)
+
 def RestaurantCreateView(request):
     form=RestaurantForm()
     if request.method == 'POST':

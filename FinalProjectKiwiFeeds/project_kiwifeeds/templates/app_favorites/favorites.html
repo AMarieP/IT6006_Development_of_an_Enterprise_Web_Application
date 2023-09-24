@@ -9,11 +9,11 @@
     <p>Welcome, {{ user_profile.this_user.username }}!</p>
 {% endif %}
 
-{% if fav_restaurants %}
+{% if restaurants_list %}
     <ul>
-        {% for favorite in fav_restaurants %}
-            <li>{{ favorite.restaurant.restaurant_name }}</li>
-        {% endfor %}
+        {% with restaurant_list=restaurants_list %}
+            {% include 'components/restaurant_list_card.html' %}
+        {% endwith %}
     </ul>
 {% else %}
     <p>You haven't added any favorite restaurants yet.</p>

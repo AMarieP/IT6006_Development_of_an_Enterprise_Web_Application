@@ -8,15 +8,7 @@ If a user is Logged in and ISNT the resturant owner a button to ass a review sho
 
 {% load custom_tags %}
 {% block content %}
-    {% comment %} <h1>{{restaurant.restaurant_name}}</h1>
-    <p>{{restaurant.restaurant_description}}</p>
-    <p> Owner :{{restaurant.restaurant_owner}} </p>
-    <p> Owner Address :{{restaurant.restaurant_owner.address}} </p>
-    <p> Owner Phone:{{restaurant.restaurant_owner.phone_number}} </p>
-    
-    <a href="{% url 'edit-restaurant' restaurant_id=restaurant.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>Edit</a>
-    <a href="{% url 'delete-restaurant' restaurant_id=restaurant.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>DELETE</a> {% endcomment %}
-
+ 
 <section>
     <h1 class="r-title">{{restaurant.restaurant_name}}</h1>
     <div class="info-wrap-details">
@@ -72,7 +64,7 @@ If a user is Logged in and ISNT the resturant owner a button to ass a review sho
     
     {% else %}
         {%  if user|user_belongs_to_group:'Admin' %}
-            <p> logged in user is Admin, not allowed to add favorite resturant </P>
+            {% comment %} <p> logged in user is Admin, not allowed to add favorite resturant </P> {% endcomment %}
         {% endif %}
         {%  if user|user_belongs_to_group:'RestaurantOwner' %}
             {% comment %} <p> logged in user is resturant onwer, not allowed to add favorite resturant </P> {% endcomment %}
@@ -81,24 +73,31 @@ If a user is Logged in and ISNT the resturant owner a button to ass a review sho
     {% endif %}
     
 </section>
+<!-- Food Menu Section-->
 <section>
     <h2>Food Items</h2>
     <ul>
       {% for food_item in restaurant.food_set.all %}
-      {{food_item.food_picture}}
+      <br>
+      {% comment %} {{food_item.food_picture.url}} {% endcomment %}
       Rest ID:{{food_item.restaurant.id }}
       Food ID:{{food_item.id}}
         <img class="header-logo" src="{{food_item.food_picture.url}}">
         <li>{{ food_item.name }} - {{ food_item.food_price }}</li>
+        {%  if user|user_belongs_to_group:'RestaurantOwner' %}
           <a href="{% url 'edit-food' food_id=food_item.id %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>Edit</a>
-
           <a href="{% url 'delete-food' food_id=food_item.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>DELETE</a>
+          {% endif %}
       {% empty %}
         <li>No food items added yet.</li>
       {% endfor %}
     </ul>
+    {%  if user|user_belongs_to_group:'RestaurantOwner' %}
     <a href="{% url 'add-food' restaurant_id=restaurant.id %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>add more food item</a>
+    {% endif %}
 </section>
+
+<!-- Review Section-->
 <section>
     <h2>Reviews</h2>
     
@@ -123,20 +122,20 @@ If a user is Logged in and ISNT the resturant owner a button to ass a review sho
             <p>No reviews available for this restaurant.</p>
         {% endfor %}
     </ul>
-
-    {% comment %} <ul>
-        <div class="reviews-wrap">
-            <li>
-                <h3 class="rev-name">{{rev_name}}</h3>
-                <div class="rating-wrap">
-                    <img class="icon" src="{% static 'images/icons/star.png' %}">
-                    <a class="r-info-text">{{rev_rating}}</a>
-                </div>
-                <p class="review-text text">{{rev_review}}</p>
-            </li>
-        </div>
-    </ul> {% endcomment %}
-   
+    <!--Add review-->
+    {%  if user|user_belongs_to_group:'Customer' %}
+    <div>
+            {% comment %} <form method="post" action="{% url 'write-a-review' restaurant_id=restaurant.id%}">
+                {% csrf_token %}
+                {{ form.as_p }}  {# Use form.as_p to render form fields #}
+                <button type="submit" class="btn btn-primary">write-a-review</button>
+            </form> {% endcomment %}
+            <a href="{% url 'write-a-review' restaurant_id=restaurant.id %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>add more food item</a>  
+        
+    </div>
+    {% endif %}
 </section>
+
+
 
 {% endblock %}
