@@ -1,19 +1,17 @@
 {% extends "base/base.html" %}
-
+{% load static%}
+{% load custom_tags %}
 {% block content %}
-<h1>My Favorite Restaurants</h1>
 
-<h1>Favorite Restaurants</h1>
-    
-{% if user_profile %}
-    <p>Welcome, {{ user_profile.this_user.username }}!</p>
-{% endif %}
 
-{% if restaurants_list %}
+<section>
+    <h1>My Favorite Restaurants</h1>
+
+{% if fav_restaurants %}
     <ul>
-        {% with restaurant_list=restaurants_list %}
-            {% include 'components/restaurant_list_card.html' %}
-        {% endwith %}
+        {% for favorite in fav_restaurants %}
+            <li>{{ favorite.restaurant.restaurant_name }}</li>
+        {% endfor %}
     </ul>
 {% else %}
     <p>You haven't added any favorite restaurants yet.</p>

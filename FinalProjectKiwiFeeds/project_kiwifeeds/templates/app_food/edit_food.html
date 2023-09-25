@@ -1,11 +1,18 @@
 <!-- TODO: Authorization so only user can create if Business Type User -->
 {% extends 'base/base.html' %}
 {% block content %}
+<section>
     <h1>Edit {{thisfood.name}}</h1>
     <hr>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+<<<<<<< HEAD
         {{ form.as_p }}
         <button type="submit">Update Food</button>
+=======
+        {{form.as_p}}
+        <input class="btn btn-action" type="submit"/>
+>>>>>>> origin/max-4-working
     </form>
+</section>
 {% endblock %}

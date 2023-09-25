@@ -7,7 +7,7 @@
         {% for restaurant in restaurant_list %}
         <div class="list-wrap">
             <li>
-                <h2 class="r-title">{{ restaurant.restaurant_name}}</h2>
+                <h3 class="r-title">{{ restaurant.restaurant_name}}</h3>
                 <div class="info-wrap-list">
                     <img class="icon" src="{% static 'images/icons/location-pin.png' %}">
                     <a href="https://www.google.com/maps/place/{{restaurant.restaurant_location}}" target="_blank" class="t-link r-info-text">{{restaurant.restaurant_location}}</a>
