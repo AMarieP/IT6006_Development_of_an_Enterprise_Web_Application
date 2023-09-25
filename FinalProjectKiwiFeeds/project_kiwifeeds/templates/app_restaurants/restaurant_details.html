@@ -75,29 +75,37 @@ If a user is Logged in and ISNT the resturant owner a button to ass a review sho
 </section>
 <!-- Food Menu Section-->
 <section>
-    <h2>Food Items</h2>
+    <h2>{{restaurant.restaurant_name}} Menu</h2>
+    {%  if user|user_belongs_to_group:'RestaurantOwner' and restaurant.restaurant_owner == user.userprofile  %}
+    <a class='btn btn-action' href="{% url 'add-food' restaurant_id=restaurant.id %}" >Add Food to Menu</a>
+    {% endif %}
+
     <ul>
       {% for food_item in foods %}
       <br>
       {% comment %} {{food_item.food_picture.url}} {% endcomment %}
-      Rest ID:{{food_item.restaurant.id }}
-      Food ID:{{food_item.id}}
-        <img class="header-logo" src="{{food_item.food_picture.url}}">
-        <li>{{ food_item.name }} - {{ food_item.food_price }}</li>
-        <li>{{ food_item.description }} </li>
-        {% comment %} resturant owner : {{food.restaurant.restaurant_owner.userprofile}}
-        Logged in User :{{restaurant.restaurant_owner}} =={{user.userprofile}} {% endcomment %}
-        {%  if user|user_belongs_to_group:'RestaurantOwner' and restaurant.restaurant_owner == user.userprofile %}
-          <a href="{% url 'edit-food' food_id=food_item.id %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>Edit</a>
-          <a href="{% url 'delete-food' food_id=food_item.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>DELETE</a>
-        {% endif %}
+      <div class='col-wrap'>
+        <div class='col-20'>
+            <img class="small-img" src="{{food_item.food_picture.url}}">
+        </div>
+        <div class='col-80'>
+            Rest ID:{{food_item.restaurant.id }}
+            Food ID:{{food_item.id}}
+              <h3>{{ food_item.name }}</h3>
+              <p class="item-price">NZD${{ food_item.food_price }}</p>
+              <p>{{ food_item.description }} </p>
+              {% comment %} resturant owner : {{food.restaurant.restaurant_owner.userprofile}}
+              Logged in User :{{restaurant.restaurant_owner}} =={{user.userprofile}} {% endcomment %}
+              {%  if user|user_belongs_to_group:'RestaurantOwner' and restaurant.restaurant_owner == user.userprofile %}
+                <a class='btn btn-dark' href="{% url 'edit-food' food_id=food_item.id %}">Edit</a>
+                <a class='btn btn-action' href="{% url 'delete-food' food_id=food_item.id  %}">Delete {{food_item.name}}</a>
+              {% endif %}
+        </div>
+    </div>
       {% empty %}
         <li>No food items added yet.</li>
       {% endfor %}
     </ul>
-    {%  if user|user_belongs_to_group:'RestaurantOwner' and restaurant.restaurant_owner == user.userprofile  %}
-    <a href="{% url 'add-food' restaurant_id=restaurant.id %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>add more food item</a>
-    {% endif %}
 </section>
 
 <section>
@@ -132,7 +140,7 @@ If a user is Logged in and ISNT the resturant owner a button to ass a review sho
                 {{ form.as_p }}  {# Use form.as_p to render form fields #}
                 <button type="submit" class="btn btn-primary">write-a-review</button>
             </form> {% endcomment %}
-            <a href="{% url 'write-a-review' restaurant_id=restaurant.id %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>add review</a>  
+            <a class='btn btn-action' href="{% url 'write-a-review' restaurant_id=restaurant.id %}">add review</a>  
         
     </div>
     {% endif %}

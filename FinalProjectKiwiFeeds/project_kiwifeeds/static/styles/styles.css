@@ -199,6 +199,21 @@ p,a{
 
 }
 
+/* cta styles */
+
+.bottom-cta{
+    border-radius: 30px;
+    padding: 20px;
+    padding-top: 40px;
+    transition: all 0.2s;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.bottom-cta:hover{
+    transform: scale(1.02);
+}
+
 /* header */
 
 #header{
@@ -358,10 +373,20 @@ text-align: center;
     background-size: cover;
 }
 
+#login-cta{
+    background: linear-gradient(272deg,rgba(60, 24, 116, 0.70) 0%, rgba(41, 41, 41, 0.70) 100%), url(../images/login-sign-up/business.jpg);
+    background-size: cover;
+}
+
 /* details page */
 
 .info-wrap-details{
     display: block;
+}
+
+.rating-wrap{
+    margin-top: 7px;
+    margin-bottom: 5px;
 }
 
 .res-details-wrap{

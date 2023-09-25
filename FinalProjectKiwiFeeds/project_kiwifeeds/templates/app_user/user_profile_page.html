@@ -15,6 +15,8 @@
         <p>Phone: {{this_user.phone_number}}</p>
         <p>Group: {{this_user.user_group}}</p>
     </p>
+    <a class='btn btn-action' href="{% url 'logout'  %}">Logout</a>
+
     {% if user|user_belongs_to_group:'RestaurantOwner' %}
         <h2>Your Restaraunts:</h2>
 
@@ -27,7 +29,6 @@
         <br>
     {% endif %}
 
-    <a class='btn btn-action' href="{% url 'logout'  %}">Logout</a>
 
 </section>
 {% endblock %}

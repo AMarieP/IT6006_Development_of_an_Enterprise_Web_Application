@@ -25,6 +25,7 @@ urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
     path('', views.HomeView.as_view() , name='home-page'),
+    path('signup-login', views.login_or_signup),
     path("restaurants/", include("app_restaurants.urls")),
     path('user/', include('app_user.urls') ),
     path('reviews/', include('app_reviews.urls') , name='reviews'),

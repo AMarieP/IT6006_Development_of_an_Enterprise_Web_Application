@@ -2,8 +2,8 @@
 {% extends 'base/base.html' %}
 {% block content %} 
 
-<h1> add new food item </h1>
-<hr>
+
+
 {% comment %} <form  action ="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
    {{ form.restaurant.as_hidden }} 
@@ -14,39 +14,39 @@
 
 
 {% comment %} <form action="" method="post" enctype="multipart/form-data"> {% endcomment %}
+<section>
+    <h1>Add New Food Item</h1>
 
-<h1>Add New Food Item</h1>
-
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.restaurant.as_hidden }}
-        <div class="form-group">
-            <label for="{{ form.name.id_for_label }}">Food Name:</label>
-            {{ form.name }}
-        </div>
-        
-        <div class="form-group">
-            <label for="{{ form.description.id_for_label }}">Description:</label>
-            {{ form.description }}
-        </div>
-        
-        <div class="form-group">
-            <label for="{{ form.food_price.id_for_label }}">Price:</label>
-            {{ form.food_price }}
-        </div>
-        
-        <div class="form-group">
-            <label for="{{ form.food_picture.id_for_label }}">Food Image:</label>
-            {{ form.food_picture }}
-        </div>
-        
-        {% comment %} <div class="form-group">
-            <label for="{{ form.restaurant.id_for_label }}">Restaurant:</label>
-            {{ form.restaurant }}
-        </div> {% endcomment %}
-        
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form> 
-    
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.restaurant.as_hidden }}
+            <div class="form-group">
+                <label for="{{ form.name.id_for_label }}">Food Name:</label>
+                {{ form.name }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.description.id_for_label }}">Description:</label>
+                {{ form.description }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.food_price.id_for_label }}">Price:</label>
+                {{ form.food_price }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.food_picture.id_for_label }}">Food Image:</label>
+                {{ form.food_picture }}
+            </div>
+            
+            {% comment %} <div class="form-group">
+                <label for="{{ form.restaurant.id_for_label }}">Restaurant:</label>
+                {{ form.restaurant }}
+            </div> {% endcomment %}
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form> 
+</section>
 
 {% endblock %} 

@@ -5,7 +5,7 @@
         <div class='banner-wrap'>
             <h1> Kiwi Food</h1>
             <p class='paragraph'>At Kiwi Food, we're passionate about connecting you with the finest flavors your city has to offer. Just like the beloved fruit, our platform is all about freshness, variety, and a burst of delightful experiences.</p>
-            <a class='btn btn-white'>Discover Place</a>
+            <a href='/restaurants' class='btn btn-white'>Discover Place</a>
         </div>
         
 
@@ -17,7 +17,7 @@
             <div class='col-50'>
                 <h2 class="heading-dark">Explore Local Favourites</h2>
                 <p class="text text-black">Our platform is your gateway to an array of local eateries, from cozy neighbourhood cafes to upscale dining destinations. With Kiwi Feeds, you can easily browse menus, read reviews, and place orders, all in one place.</p>
-                <a class='btn btn-dark'>Discover Local</a>
+                <a href='/restaurants' class='btn btn-dark'>Discover Local</a>
             </div>
             <div class='col-50'>
                 <img src="{% static 'images/home-page/home-page-info-2.png' %}" alt="" class='' />
@@ -35,9 +35,22 @@
             <div class='col-50'>
                 <h2 class="heading-dark">Savour Every Moment</h2>
                 <p class="text text-black">We believe that food isn't just nourishment; it's an art form, a cultural experience, and a source of joy. Whether it's a weekday dinner or a special celebration, Kiwi Feeds is here to make every meal memorable.</p>
-                <a class='btn btn-dark'>Create Customer Account</a>
+                <a href='/user/signup' class='btn btn-dark'>Create Customer Account</a>
             </div>
         </div>
+    </section>
+
+    <section>
+        <div>
+            <div class='bottom-cta' id="login-cta">
+                <h2 class='cta-heading'>Join the Kiwi Feeds Family</h2>
+                <p class='cta-par'>Get ready to embark on a culinary journey like never before. Sign up today to start discovering the flavours of your city, one bite at a time.</p>
+                <div class='cta-small-col'>
+                    <a href='user/signup-business' class='btn btn-white btn-cta'>Create Business Profile</a>
+                </div>
+            </div>
+        </div>
+    
     </section>
 
 
