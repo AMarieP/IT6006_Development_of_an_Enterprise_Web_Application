@@ -46,6 +46,8 @@ section{
     margin-left: auto;
     padding-top: 125px;
     padding-bottom: 75px;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 /* styles for columns */
@@ -62,6 +64,25 @@ section{
 .col-33{
     width: 33%;
     padding: 20px;
+}
+
+.col-20{
+    padding: 20px;
+    width: 20%;
+}
+
+.col-80{
+    padding: 20px;
+    width: 80%;
+}
+
+ul{
+    padding: 0px;
+}
+
+.list-wrap{
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 /* typography */
@@ -82,6 +103,8 @@ h2{
 
 h3{
     font-size: 2em ;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
 }
 
 .heading-dark{
@@ -354,8 +377,15 @@ text-align: center;
 
 p > label{
     display: flex;
+    max-width: 500px;
+    font-size: 20px;
+}
+
+div > label{
+    display: flex;
     font-size: 20px;
     max-width: 500px;
+    font-family: var(--t-heading);
 }
 
 input,select{
@@ -399,4 +429,15 @@ input:focus-visible{
 
 .helptext{
     margin-left: 20px;
+}
+
+/* misc */
+
+.small-img{
+    max-width: 100%;
+}
+
+.item-price{
+    font-weight: 600;
+    color: var(--c-red);
 }

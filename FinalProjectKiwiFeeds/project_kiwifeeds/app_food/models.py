@@ -13,7 +13,7 @@ class Food(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=300)
     food_picture = models.ImageField(
-        default='/profile_pics/temp_pfp_placeholder_REPLACE_LATER.avif',
+        default='/profile_pics/',
         upload_to=get_food_image_upload_path,
         height_field=None,
         width_field=None

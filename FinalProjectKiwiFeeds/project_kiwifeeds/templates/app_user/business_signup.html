@@ -4,45 +4,48 @@
 {% block content %}
 
     <!-- Your content here -->
-    <h1>Sign Up for Business Profile</h1>
-    <form action="." method="POST">
-        {% csrf_token %}
+    <section>
+        <h1>Sign Up for Business Profile</h1>
+        <form action="." method="POST">
+            {% csrf_token %}
 
-        <div>
-            {{user_form.username.errors}}
-            <label for="{{user_form.username.id_for_label}}">Username:</label>
-            {{user_form.username}}
-        </div>
-        <div>
-            {{user_form.password.errors}}
-            <label for="{{user_form.password.id_for_label}}">Password:</label>
-            {{user_form.password}}
-        </div>
-        <div>
-            {{user_form.email.errors}}
-            <label for="{{user_form.email.id_for_label}}">Email:</label>
-            {{user_form.email}}
-        </div>
-        <div>
-            {{profile_form.profile_picture.errors}}
-            <label for="{{profile_form.profile_picture.id_for_label}}">Profile Picture:</label>
-            {{profile_form.profile_picture}}
-        </div>
-        <div>
-            {{profile_form.phone_number.errors}}
-            <label for="{{profile_form.phone_number.id_for_label}}">Phone Number:</label>
-            {{profile_form.phone_number}}
-        </div>
-        <div>
-            {{profile_form.address.errors}}
-            <label for="{{profile_form.address.id_for_label}}">Address:</label>
-            {{profile_form.address}}
-        </div>
-        <!-- {{user_form.as_p}}
-        {{profile_form.as_p}} -->
-        <button type="submit">SUBMIT</button>
+            <div>
+                {{user_form.username.errors}}
+                <label for="{{user_form.username.id_for_label}}">Username:</label>
+                {{user_form.username}}
+            </div>
+            <div>
+                {{user_form.password.errors}}
+                <label for="{{user_form.password.id_for_label}}">Password:</label>
+                {{user_form.password}}
+            </div>
+            <div>
+                {{user_form.email.errors}}
+                <label for="{{user_form.email.id_for_label}}">Email:</label>
+                {{user_form.email}}
+            </div>
+            <div>
+                {{profile_form.profile_picture.errors}}
+                <label for="{{profile_form.profile_picture.id_for_label}}">Profile Picture:</label>
+                {{profile_form.profile_picture}}
+            </div>
+            <div>
+                {{profile_form.phone_number.errors}}
+                <label for="{{profile_form.phone_number.id_for_label}}">Phone Number:</label>
+                {{profile_form.phone_number}}
+            </div>
+            <div>
+                {{profile_form.address.errors}}
+                <label for="{{profile_form.address.id_for_label}}">Address:</label>
+                {{profile_form.address}}
+            </div>
+            <!-- {{user_form.as_p}}
+            {{profile_form.as_p}} -->
+            <button class="btn btn-action" type="submit">Create Business Profile</button>
 
-    </form>
+        </form>
+
+    </section>
 
 
 {% endblock %}

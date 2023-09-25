@@ -45,7 +45,6 @@ If a user is Logged in and ISNT the resturant owner a button to ass a review sho
     </p>
     <div class="button-wrap">
         <a href="https://www.google.com/maps/place/{{restaurant.restaurant_location}}" target="_blank"class="btn btn-dark">Get Directions</a>
-        <a href=""class="btn btn-dark">View Menu</a>
         {% if user.is_authenticated and user|user_belongs_to_group:'RestaurantOwner' %}
             {% if restaurant.restaurant_owner == user.userprofile %}
                 <a class="btn btn-action" href="{% url 'edit-restaurant' restaurant.id %}" >Edit</a>
@@ -79,14 +78,33 @@ If a user is Logged in and ISNT the resturant owner a button to ass a review sho
         
     {% endif %}
 </section>
-{% if reviews %}
-    <p>Overall Rating:</p>
-    <div class="rating-wrap">
-        {% for _ in "x"|ljust:overall_rating %}
-            <img class="icon" src="{% static 'images/icons/star.png' %}">
-        {% endfor %}
-    </div>
-{% endif %}
+
+<section>
+    <h2>Food Menu</h2>
+    <ul>
+      {% for food_item in restaurant.food_set.all %}
+      <div class='col-wrap'>
+        <div class="col-20">
+          <img class='small-img' src="{{ food_item.food_picture.url}}">
+        </div>
+        <div class='col-80'>
+          <h3>
+            {{ food_item.name }}
+          </h3>
+          <p class='item-price'>
+            NZD${{ food_item.food_price }}
+          </p>
+          <p>
+            {{ food_item.description }}
+          </p>
+        </div>
+      </div>
+      {% empty %}
+        <li>No food items added yet.</li>
+      {% endfor %}
+    </ul>
+
+</section>
 <section>
     <h2>Reviews</h2>
     

@@ -1,23 +1,39 @@
 {% extends "base/base.html" %}
-
+{% load static%}
+{% load custom_tags %}
 {% block content %}
-<h1>My Favorite Restaurants</h1>
 
-<h1>Favorite Restaurants</h1>
-    
-{% if user_profile %}
-    <p>Welcome, {{ user_profile.this_user.username }}!</p>
-{% endif %}
 
-{% if fav_restaurants %}
-    <ul>
-        {% for favorite in fav_restaurants %}
-            <li>{{ favorite.restaurant.restaurant_name }}</li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>You haven't added any favorite restaurants yet.</p>
-{% endif %}
+<section>
+    <h1>My Favorite Restaurants</h1>
+
+    {% if fav_restaurants %}
+        <ul>
+            {% for favorite in fav_restaurants %}
+
+
+                <li>
+                    <h3 class="r-title">{{ favorite.restaurant.restaurant_name}}</h3>
+                    <div class="info-wrap-list">
+                        <img class="icon" src="{% static 'images/icons/location-pin.png' %}">
+                        <a href="https://www.google.com/maps/place/{{favorite.restaurant.restaurant_location}}" target="_blank" class="t-link r-info-text">{{favorite.restaurant.restaurant_location}}</a>
+                        <img class="icon" src="{% static 'images/icons/star.png' %}">
+                        <a class="t-link r-info-text">{{r_rating}}</a>
+                    </div>
+                    <p class="text">{{favorite.restaurant.restaurant_description}}</p>
+                    </p>
+                    <div class="button-wrap">
+                        <a href="{% url 'restaurant-details' restaurant_id=favorite.restaurant.id %}" class="btn btn-dark">View Details</a>
+
+            
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't added any favorite restaurants yet.</p>
+    {% endif %}
+<section>
 
 
 {% endblock %}
