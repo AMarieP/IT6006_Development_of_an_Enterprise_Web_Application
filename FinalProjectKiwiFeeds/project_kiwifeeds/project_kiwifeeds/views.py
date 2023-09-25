@@ -25,6 +25,10 @@ def restaraunt_catalog(request):
 def login_or_signup(request):
     return render(request, "login-or-signup.html")
 
+def privacy_policy(request):
+    return render(request, "privacy-policy.html")
+
+
 def restaraunt_details(request):
     context={
         'r_name':"Hoppers",
