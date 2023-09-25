@@ -1,12 +1,45 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
-    <!-- Your content here -->
-    <h1>Home page</h1>
-    <img src="{% static 'HomePageImages/main-food-home-page.png' %}" alt="Alternative text" width="200" height="200">
-    <h1>Tailwind setup</h1>
-    <h1 class='text-red-500 bg-black'>Tailwind setup test </h1>
-   
+    <div class="home-banner">
+        <div class='banner-wrap'>
+            <h1> Kiwi Food</h1>
+            <p class='paragraph'>At Kiwi Food, we're passionate about connecting you with the finest flavors your city has to offer. Just like the beloved fruit, our platform is all about freshness, variety, and a burst of delightful experiences.</p>
+            <a class='btn btn-white'>Discover Place</a>
+        </div>
+        
+
+    </div>
+
+    <!-- main-info bar 1-->
+    <section>
+        <div class="col-wrap">
+            <div class='col-50'>
+                <h2 class="heading-dark">Explore Local Favourites</h2>
+                <p class="text text-black">Our platform is your gateway to an array of local eateries, from cozy neighbourhood cafes to upscale dining destinations. With Kiwi Feeds, you can easily browse menus, read reviews, and place orders, all in one place.</p>
+                <a class='btn btn-dark'>Discover Local</a>
+            </div>
+            <div class='col-50'>
+                <img src="{% static 'images/home-page/home-page-info-2.png' %}" alt="" class='' />
+            </div>
+        </div>
+    </section>
+    <!-- main-info bar 2-->
+  
+
+    <section>
+        <div class="col-wrap">
+            <div class='col-50'>
+                <img src="{% static 'images/home-page/home-page-info-1.png' %}" alt="Company Logo" class="" />
+            </div>
+            <div class='col-50'>
+                <h2 class="heading-dark">Savour Every Moment</h2>
+                <p class="text text-black">We believe that food isn't just nourishment; it's an art form, a cultural experience, and a source of joy. Whether it's a weekday dinner or a special celebration, Kiwi Feeds is here to make every meal memorable.</p>
+                <a class='btn btn-dark'>Create Customer Account</a>
+            </div>
+        </div>
+    </section>
+
 
 
 

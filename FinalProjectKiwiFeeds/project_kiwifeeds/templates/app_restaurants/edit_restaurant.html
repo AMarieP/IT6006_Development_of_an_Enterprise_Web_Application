@@ -1,11 +1,40 @@
+<!-- TODO User can only access page if they are owner of Resturant -->
+
 {% extends 'base/base.html' %}
 {% block content %}
+<section>
     <h1>Edit Restaurant</h1>
-    <hr>
+    <form method="post">
+        {% csrf_token %}
+        {{ restaurant_form.as_p }}
+        <button class="btn btn-action" type="submit" name="edit_restaurant_form">Save Restaurant</button>
+      </form>
+      
+      {% comment %} <h2>Add Food Item</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ food_form.as_p }}
+        <button type="submit" name="add_food_form">Add Food</button>
+      </form> {% endcomment %}
+{% comment %}       
+      <h2>Food Items</h2>
+      <ul>
+        {% for food_item in restaurant.food_set.all %}
+          <li>{{ food_item.name }} - {{ food_item.food_price }}</li>
+            <a href="{% url 'edit-food' food_id=food_item.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>Edit</a>
+            <a href="{% url 'delete-food' food_id=food_item.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>DELETE</a>
+        {% empty %}
+          <li>No food items added yet.</li>
+        {% endfor %}
+      </ul> {% endcomment %}
+ 
+
+    {% comment %} <hr>
     <form action="" method="post">
         {% csrf_token %}
         {{form.as_p}}
-        <input type="submit"/>
-    </form>
+        <button class="btn btn-action" type="submit">Update Restaraunt Details</button>
+    </form> {% endcomment %}
+</section>
 {% endblock%}
 

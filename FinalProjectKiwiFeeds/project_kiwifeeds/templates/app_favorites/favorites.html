@@ -1,0 +1,23 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<h1>My Favorite Restaurants</h1>
+
+<h1>Favorite Restaurants</h1>
+    
+{% if user_profile %}
+    <p>Welcome, {{ user_profile.this_user.username }}!</p>
+{% endif %}
+
+{% if fav_restaurants %}
+    <ul>
+        {% for favorite in fav_restaurants %}
+            <li>{{ favorite.restaurant.restaurant_name }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>You haven't added any favorite restaurants yet.</p>
+{% endif %}
+
+
+{% endblock %}

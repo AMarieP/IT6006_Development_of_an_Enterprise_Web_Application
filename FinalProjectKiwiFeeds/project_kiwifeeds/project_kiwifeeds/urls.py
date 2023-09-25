@@ -26,9 +26,10 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path('', views.HomeView.as_view() , name='home-page'),
     path("restaurants/", include("app_restaurants.urls")),
-    path('', include('app_user.urls') , name='user'),
-    path('', include('app_reviews.urls') , name='reviews'),
-    path('', include('app_food.urls')),
+    path('user/', include('app_user.urls') ),
+    path('reviews/', include('app_reviews.urls') , name='reviews'),
+    path('food/', include('app_food.urls')),
+    path('favorites-restaurants/', include('app_favorites.urls',)),
 
 
     ]

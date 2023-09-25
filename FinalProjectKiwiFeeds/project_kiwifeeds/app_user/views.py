@@ -8,9 +8,13 @@ from .forms import *
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import Group
 
 
-#Create a user, render the default User form as well as the UserPrfile odel on One Page
+
+#Create a user, render the default User form as well as the UserProfile Form on One Page
+
+#Auto adds the user to group 'Reviewers'
 class UserCreateView(CreateView):
 
     def get(self, request, *args, **kwargs):
@@ -24,6 +28,8 @@ class UserCreateView(CreateView):
             #save the User
             user = user_form.save()
             user.set_password(user.password)
+            user_group = Group.objects.get(name='Customer')
+            user.groups.add(user_group)
             user.save()
             #Do not save the profile yet so we can set things as we want
             profile = profile_form.save(commit=False)
@@ -36,20 +42,55 @@ class UserCreateView(CreateView):
             print ('user: ', user_form.errors, 'profile: ', profile_form.errors)
 
         return render(request, 'app_user/user_signup.html', {'user_form': UserForm(), 'profile_form': ProfileForm()})
-    # success_url = reverse_lazy('profile-page')
+    success_url = reverse_lazy('profile-page')
     # template_name = 'app_user/user_signup.html'
+
+#Auto addes the user to group 'ResturantOwner'
+class BusinessUserCreateView(CreateView):
+
+    def get(self, request, *args, **kwargs):
+        context = {'user_form': UserForm(), 'profile_form': ProfileForm()}
+        return render(request, 'app_user/business_signup.html', context)
+
+    def post(self, request, *args, **kwargs):
+        user_form = UserForm(request.POST)
+        profile_form = ProfileForm(request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            #save the User
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            user_group = Group.objects.get(name='RestaurantOwner')
+            user.groups.add(user_group)
+            #Do not save the profile yet so we can set things as we want
+            profile = profile_form.save(commit=False)
+            profile.this_user = user #This sets the FK to the user we just saved
+            if 'picture' in request.FILES:#sets the pfp
+                profile.profile_picture = request.FILES['picture']
+            profile.save()
+            return HttpResponseRedirect(reverse_lazy('profile-page', kwargs={'pk': profile.pk}))
+        else:
+            print ('user: ', user_form.errors, 'profile: ', profile_form.errors)
+
+        return render(request, 'app_user/business_signup.html', {'user_form': UserForm(), 'profile_form': ProfileForm()})
+
+
 
 class UserProfileView(LoginRequiredMixin, DetailView):
     model = UserProfile
     context_object_name = 'this_user'
     fields = ['profile_picture', 'phone_number', 'address']
     template_name = 'app_user/user_profile_page.html'
+    
+    def get_object(self, queryset=None):
+        # Return the currently logged-in user's profile
+        return self.request.user.userprofile
 
 class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = UserProfile
     fields = ['profile_picture', 'phone_number', 'address']
     template_name = 'app_user/user_profile_edit.html'
-#Need to add sort of mixin to test if logged in user is same as profile
+    #Need to add sort of mixin to test if logged in user is same as profile
     #Redirects back to User's pfp
     def get_success_url(self, **kwargs):
         return reverse_lazy("profile-page", kwargs={'pk': self.object.pk})
@@ -74,7 +115,7 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
 
 class UserLoginView(LoginView):
     redirect_authenticated_user = True
-    success_url = reverse_lazy('home-page')
+    success_url = reverse_lazy('profile-page')
     template_name = 'app_user/user_login.html'
     
     #Error Message, rerender login form
@@ -83,7 +124,7 @@ class UserLoginView(LoginView):
         messages.error(self.request,'Invalid username or password')
         return self.render_to_response(self.get_context_data(form=form))
 
-class UserLogoutView(LogoutView):
+class UserLogoutView(LoginRequiredMixin, LogoutView):
     success_url = reverse_lazy('home-page')
     template_name = 'app_user/user_logout.html'
 

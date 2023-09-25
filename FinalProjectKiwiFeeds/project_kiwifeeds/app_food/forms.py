@@ -5,3 +5,4 @@ class FoodForm(ModelForm):
      class Meta:
          model = Food
          fields = ['name', 'description', 'food_picture', 'food_price','restaurant'] 
+

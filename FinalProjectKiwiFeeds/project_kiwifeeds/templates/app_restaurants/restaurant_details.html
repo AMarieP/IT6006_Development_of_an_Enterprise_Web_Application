@@ -1,8 +1,142 @@
+<!-- TODO: Will need to display Menu Items and Reviews attached to Model on this Page 
+Display button to edit and delete if the Resturant is owned by current user
+If a user is Logged in and ISNT the resturant owner a button to ass a review should be shown-->
+
+
 {% extends 'base/base.html' %}
+{% load static%}
+
+{% load custom_tags %}
 {% block content %}
-    <h1>{{restaurant.restaurant_name}}</h1>
+    {% comment %} <h1>{{restaurant.restaurant_name}}</h1>
     <p>{{restaurant.restaurant_description}}</p>
-    <a href="{% url 'edit-restaurant' restaurant.id %}" >Edit</a>
+    <p> Owner :{{restaurant.restaurant_owner}} </p>
+    <p> Owner Address :{{restaurant.restaurant_owner.address}} </p>
+    <p> Owner Phone:{{restaurant.restaurant_owner.phone_number}} </p>
+    
+    <a href="{% url 'edit-restaurant' restaurant_id=restaurant.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>Edit</a>
+    <a href="{% url 'delete-restaurant' restaurant_id=restaurant.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>DELETE</a> {% endcomment %}
 
-    {% endblock%}
+<section>
+    <h1 class="r-title">{{restaurant.restaurant_name}}</h1>
+    <div class="info-wrap-details">
+        <div class="res-details-wrap">
+            <div class="icon-text-wrap">
+                <img class="icon" src="{% static 'images/icons/location-pin.png' %}">
+                <a class="r-info-text">{{restaurant.restaurant_location}}</a>
+            </div>
+            <div class="icon-text-wrap">
+                {% if reviews %}
+                <!-- Overall ratign-->
+                    <div class="rating-wrap">
+                        {% for _ in "x"|ljust:overall_rating %}
+                            <img class="icon" src="{% static 'images/icons/star.png' %}">
+                        {% endfor %}
+                    </div>
+                {% endif %}
 
+            </div>
+            <div class="icon-text-wrap">
+                <img class="icon" src="{% static 'images/icons/owner.png' %}">
+                <a class="r-info-text">{{restaurant.restaurant_owner}}</a>
+            </div>
+        </div>
+    </div>
+    <p class="text">{{restaurant.restaurant_description}}</p>
+    </p>
+    <div class="button-wrap">
+        <a href="https://www.google.com/maps/place/{{restaurant.restaurant_location}}" target="_blank"class="btn btn-dark">Get Directions</a>
+        {% comment %} <a href=""class="btn btn-dark">View Menu</a> {% endcomment %}
+        {% if user.is_authenticated and user|user_belongs_to_group:'RestaurantOwner' %}
+            {% if restaurant.restaurant_owner == user.userprofile %}
+                <a class="btn btn-action" href="{% url 'edit-restaurant' restaurant.id %}" >Edit</a>
+            {% endif %}
+        {% endif %}
+    </div>
+    {% if user.is_authenticated and user|user_belongs_to_group:'Customer' %}
+            {% if not restaurant.restaurant_owner == user.userprofile %}
+                {% if is_favorite %}
+                    <form method="post" action="{% url 'remove-from-favorites' restaurant.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-action">Remove from Favorites</button>
+                    </form>
+                    
+                {% else %}
+                    <form method="post" action="{% url 'add-to-favorites' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="restaurant_id" value="{{ restaurant.id }}">
+                        <button type="submit" class="btn btn-action">Add to Favorites</button>
+                    </form>
+                {% endif %}
+            {% endif %}
+    
+    {% else %}
+        {%  if user|user_belongs_to_group:'Admin' %}
+            <p> logged in user is Admin, not allowed to add favorite resturant </P>
+        {% endif %}
+        {%  if user|user_belongs_to_group:'RestaurantOwner' %}
+            {% comment %} <p> logged in user is resturant onwer, not allowed to add favorite resturant </P> {% endcomment %}
+        {% endif %}
+        
+    {% endif %}
+    
+</section>
+<section>
+    <h2>Food Items</h2>
+    <ul>
+      {% for food_item in restaurant.food_set.all %}
+      {{food_item.food_picture}}
+      Rest ID:{{food_item.restaurant.id }}
+      Food ID:{{food_item.id}}
+        <img class="header-logo" src="{{food_item.food_picture.url}}">
+        <li>{{ food_item.name }} - {{ food_item.food_price }}</li>
+          <a href="{% url 'edit-food' food_id=food_item.id %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>Edit</a>
+
+          <a href="{% url 'delete-food' food_id=food_item.id  %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>DELETE</a>
+      {% empty %}
+        <li>No food items added yet.</li>
+      {% endfor %}
+    </ul>
+    <a href="{% url 'add-food' restaurant_id=restaurant.id %}" class='bg-red-400 px-3 rounded-md font-bold text-white'>add more food item</a>
+</section>
+<section>
+    <h2>Reviews</h2>
+    
+    <ul>
+     
+        {% for review in reviews %}
+            <ul>
+                <div class="reviews-wrap">
+                    <li>
+                        <h3 class="rev-name">{{ review.user.this_user.username|title }}</h3>
+                        <div class="rating-wrap">
+                            {% for _ in "x"|ljust:review.rating %}
+                                <img class="icon" src="{% static 'images/icons/star.png' %}">
+                            {% endfor %}
+                            {% comment %} <a class="r-info-text">{{ review.rating }}</a> {% endcomment %}
+                        </div>
+                        <p class="review-text text">{{ review.comment }}</p>
+                    </li>
+                </div>
+            </ul>
+        {% empty %}
+            <p>No reviews available for this restaurant.</p>
+        {% endfor %}
+    </ul>
+
+    {% comment %} <ul>
+        <div class="reviews-wrap">
+            <li>
+                <h3 class="rev-name">{{rev_name}}</h3>
+                <div class="rating-wrap">
+                    <img class="icon" src="{% static 'images/icons/star.png' %}">
+                    <a class="r-info-text">{{rev_rating}}</a>
+                </div>
+                <p class="review-text text">{{rev_review}}</p>
+            </li>
+        </div>
+    </ul> {% endcomment %}
+   
+</section>
+
+{% endblock %}

@@ -1,27 +1,14 @@
-{% extends "base/base.html"%}
+{% extends 'base/base.html' %}
+{% load static %}
 {% block content %}
 
-<h1>Restaurant List</h1>
+<section>
+    <h1>All Restaraunts</h1>
 
-<a href="{% url 'create-restaurant' %}" >Create Restaurant</a>
+    {% with restaurant_list=restaurant_list %}
+            {% include 'components/restaurant_list_card.html' %}
+    {% endwith %}
 
-    {% if restaurant_list %}
+</section>
 
-    <ul>
-        {% for restaurant in restaurant_list %}
-        <a href="{% url 'restaurant-details' restaurant_id=restaurant.id %}"  class="">
-
-            <li><h1> {{ restaurant.restaurant_name}} </h1>
-
-        </a>
-        <!-- <li><h1> {{ restaurant.restaurant_name}} </h1> -->
-        <p> {{restaurant.restaurant_description}} </p>
-        
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p> Restaurant not available</p>
-    {% endif %}
-    
-{% endblock content %}
+{%endblock content%}

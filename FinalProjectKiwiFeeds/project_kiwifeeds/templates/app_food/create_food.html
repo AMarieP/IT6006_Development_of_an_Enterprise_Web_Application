@@ -1,13 +1,14 @@
+<!-- TODO: Authorization so only user can create if Business Type User -->
 {% extends 'base/base.html' %}
 {% block content %} 
 
 <h1> add new food item </h1>
 <hr>
-<form  method="post">
+<form  action ="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     {{ form.as_p }}
-    <input type="submit" />
+    <button type="submit">Submit</button>
 
 </form>
 
