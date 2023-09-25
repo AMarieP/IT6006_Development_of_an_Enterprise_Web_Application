@@ -1,7 +1,9 @@
+<!-- Only Logged In and Own Profile of User (done w login required mixin)-->
+
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
-
+<section>
     <!-- Your content here -->
     <h1>Edit Profile</h1>
     <form action="." method="POST">
@@ -10,6 +12,6 @@
         {{form.as_p}}
         <button type="submit">SUBMIT</button>
     </form>
-
+</section>
 
 {% endblock %}

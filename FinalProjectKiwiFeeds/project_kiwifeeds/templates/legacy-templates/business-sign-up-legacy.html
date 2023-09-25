@@ -1,0 +1,40 @@
+{% import static %}
+
+<section>
+    <div class="form-wrapper">
+        <div class="rendered-form">
+            <div class="formbuilder-text form-group field-bus-first-name">
+                <label for="bus-first-name" class="formbuilder-text-label"><span class="formbuilder-required">*</span></label>
+                <input type="text" placeholder="First Name" class="form-field" name="bus-first-name" access="false" maxlength="50" id="bus-first-name" required="required" aria-required="true">
+            </div>
+            <div class="formbuilder-text form-group field-bus-last-name">
+                <label for="bus-last-name" class="formbuilder-text-label"><span class="formbuilder-required">*</span></label>
+                <input type="text" placeholder="Last Name" class="form-field" name="bus-last-name" access="false" maxlength="50" id="bus-last-name" required="required" aria-required="true">
+            </div>
+            <div class="formbuilder-text form-group field-bus-name">
+                <label for="bus-name" class="formbuilder-text-label"><span class="formbuilder-required">*</span></label>
+                <input type="text" placeholder="Business Name" class="form-field" name="bus-name" access="false" maxlength="50" id="bus-name" required="required" aria-required="true">
+            </div>
+            <div class="formbuilder-textarea form-group field-bus-desc">
+                <label for="bus-desc" class="formbuilder-textarea-label"><span class="formbuilder-required">*</span></label>
+                <textarea type="textarea" placeholder="Business Description" class="form-control" name="bus-desc" access="false" id="bus-desc" required="required" aria-required="true"></textarea>
+            </div>
+            <div class="formbuilder-text form-group field-bus-address">
+                <label for="bus-address" class="formbuilder-text-label"><span class="formbuilder-required">*</span></label>
+                <input type="text" placeholder="Business Address" class="form-field" name="bus-address" access="false" maxlength="255" id="bus-address" required="required" aria-required="true">
+            </div>
+            <div class="formbuilder-file form-group field-res-photo">
+                <label for="res-photo" class="formbuilder-file-label">Upload Restaurant Photo<span class="formbuilder-required">*</span></label>
+                <input type="file" placeholder="Upload Restaurant Photo" class="form-upload" name="res-photo" access="false" multiple="false" id="res-photo" required="required" aria-required="true">
+            </div>
+            <div class="formbuilder-file form-group field-bus-menu">
+                <label for="bus-menu" class="formbuilder-file-label">Upload Restaurant Menu<span class="formbuilder-required">*</span></label>
+                <input type="file" class="form-upload" name="bus-menu" access="false" multiple="false" id="bus-menu" required="required" aria-required="true">
+            </div>
+            <div class="formbuilder-text form-group field-bus-pass">
+                <label for="bus-pass" class="formbuilder-text-label"><span class="formbuilder-required">*</span></label>
+                <input type="text" placeholder="Password" class="form-field" name="bus-pass" access="false" maxlength="255" id="bus-pass" required="required" aria-required="true">
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,12 +1,34 @@
+<!-- Only Logged In can View (done w login required mixin)-->
+<!-- If own profile, can see edit and delete buttons-->
+
 {% extends 'base/base.html' %}
 {% load static %}
+{% load custom_tags %}
 {% block content %}
 
+<section>
+
     <!-- Your content here -->
-    <h1>View Profile</h1>
-    <h2>Name: {{this_user.this_user}}</h2>
-    <h2>Phone: {{this_user.phone_number}}</h2>
+    <p class='flex flex-col gap-5'>View Profile
+        <p>Name: {{this_user.this_user.username}}</p>
+        <p>loged in user: {{ request.user.username }}</p>
+        <p>Phone: {{this_user.phone_number}}</p>
+        <p>Group: {{this_user.user_group}}</p>
+    </p>
+    <a class='btn btn-action' href="{% url 'logout'  %}">Logout</a>
+
+    {% if user|user_belongs_to_group:'RestaurantOwner' %}
+        <h2>Your Restaraunts:</h2>
+
+        {% with restaurant_list=this_user.restaurant_owner_user.all %}
+            {% include 'components/restaurant_list_card.html' %}
+        {% endwith %}
 
 
+        <a href="{% url 'create-restaurant' %}" class="btn btn-dark">Add New Restaurant</a>
+        <br>
+    {% endif %}
 
+
+</section>
 {% endblock %}

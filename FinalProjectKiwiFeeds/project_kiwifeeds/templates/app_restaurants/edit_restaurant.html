@@ -1,11 +1,60 @@
+<!-- TODO User can only access page if they are owner of Resturant -->
+
 {% extends 'base/base.html' %}
 {% block content %}
-    <h1>Edit Restaurant</h1>
-    <hr>
+<section>
+  <div class='col-wrap'>
+    <div class='col-50'>
+      <h2>Edit Restaurant</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ restaurant_form.as_p }}
+        <button class="btn btn-action" type="submit" name="edit_restaurant_form">Save Restaurant</button>
+      </form>
+      
+      {% comment %} <h2>Add Food Item</h2>
+      <div class='col-50'>
+      <h2>Add Food Item</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ food_form.as_p }}
+        <button type="submit" class="btn btn-action" name="add_food_form">Add Food</button>
+      </form>
+    </div> {% endcomment %}
+{% comment %}       
+      <h2>Food Items</h2>
+      <ul>
+        {% for food_item in restaurant.food_set.all %}
+        <div class='col-wrap'>
+          <div class="col-20">
+            <img class='small-img' src="{{ food_item.food_picture.url}}">
+          </div>
+          <div class='col-80'>
+            <h3>
+              {{ food_item.name }}
+            </h3>
+            <p class='item-price'>
+              NZD${{ food_item.food_price }}
+            </p>
+            <p>
+              {{ food_item.description }}
+            </p>
+            <a href="{% url 'edit-food' food_id=food_item.id  %}" class='btn btn-dark'>Edit</a>
+            <a href="{% url 'delete-food' food_id=food_item.id  %}" class='btn btn-action'>Delete {{food_item.name}}</a>
+          </div>
+        </div>
+        {% empty %}
+          <li>No food items added yet.</li>
+        {% endfor %}
+      </ul> {% endcomment %}
+ 
+
+    {% comment %} <hr>
     <form action="" method="post">
         {% csrf_token %}
         {{form.as_p}}
-        <input type="submit"/>
-    </form>
+        <button class="btn btn-action" type="submit">Update Restaraunt Details</button>
+    </form> {% endcomment %}
+</section>
 {% endblock%}
 

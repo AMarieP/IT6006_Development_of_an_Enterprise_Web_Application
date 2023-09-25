@@ -1,8 +1,151 @@
+<!-- TODO: Will need to display Menu Items and Reviews attached to Model on this Page 
+Display button to edit and delete if the Resturant is owned by current user
+If a user is Logged in and ISNT the resturant owner a button to ass a review should be shown-->
+
+
 {% extends 'base/base.html' %}
+{% load static%}
+
+{% load custom_tags %}
 {% block content %}
-    <h1>{{restaurant.restaurant_name}}</h1>
-    <p>{{restaurant.restaurant_description}}</p>
-    <a href="{% url 'edit-restaurant' restaurant.id %}" >Edit</a>
+ 
+<section>
+    <h1 class="r-title">{{restaurant.restaurant_name}}</h1>
+    <div class="info-wrap-details">
+        <div class="res-details-wrap">
+            <div class="icon-text-wrap">
+                <img class="icon" src="{% static 'images/icons/location-pin.png' %}">
+                <a class="r-info-text">{{restaurant.restaurant_location}}</a>
+            </div>
+            <div class="icon-text-wrap">
+                {% if reviews %}
+                <!-- Overall ratign-->
+                    <div class="rating-wrap">
+                        {% for _ in "x"|ljust:overall_rating %}
+                            <img class="icon" src="{% static 'images/icons/star.png' %}">
+                        {% endfor %}
+                    </div>
+                {% endif %}
 
-    {% endblock%}
+            </div>
+            <div class="icon-text-wrap">
+                <img class="icon" src="{% static 'images/icons/owner.png' %}">
+                <a class="r-info-text">{{restaurant.restaurant_owner}}</a>
+            </div>
+        </div>
+    </div>
+    <p class="text">{{restaurant.restaurant_description}}</p>
+    </p>
+    <div class="button-wrap">
+        <a href="https://www.google.com/maps/place/{{restaurant.restaurant_location}}" target="_blank"class="btn btn-dark">Get Directions</a>
+        {% comment %} <a href=""class="btn btn-dark">View Menu</a> {% endcomment %}
+        {% if user.is_authenticated and user|user_belongs_to_group:'RestaurantOwner' %}
+            {% if restaurant.restaurant_owner == user.userprofile %}
+                <a class="btn btn-action" href="{% url 'edit-restaurant' restaurant.id %}" >Edit</a>
+            {% endif %}
+        {% endif %}
+    </div>
+    {% if user.is_authenticated and user|user_belongs_to_group:'Customer' %}
+            {% if not restaurant.restaurant_owner == user.userprofile %}
+                {% if is_favorite %}
+                    <form method="post" action="{% url 'remove-from-favorites' restaurant.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-action">Remove from Favorites</button>
+                    </form>
+                    
+                {% else %}
+                    <form method="post" action="{% url 'add-to-favorites' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="restaurant_id" value="{{ restaurant.id }}">
+                        <button type="submit" class="btn btn-action">Add to Favorites</button>
+                    </form>
+                {% endif %}
+            {% endif %}
+    
+    {% else %}
+        {%  if user|user_belongs_to_group:'Admin' %}
+            {% comment %} <p> logged in user is Admin, not allowed to add favorite resturant </P> {% endcomment %}
+        {% endif %}
+        {%  if user|user_belongs_to_group:'RestaurantOwner' %}
+            {% comment %} <p> logged in user is resturant onwer, not allowed to add favorite resturant </P> {% endcomment %}
+        {% endif %}
+        
+    {% endif %}
+    
+</section>
+<!-- Food Menu Section-->
+<section>
+    <h2>{{restaurant.restaurant_name}} Menu</h2>
+    {%  if user|user_belongs_to_group:'RestaurantOwner' and restaurant.restaurant_owner == user.userprofile  %}
+    <a class='btn btn-action' href="{% url 'add-food' restaurant_id=restaurant.id %}" >Add Food to Menu</a>
+    {% endif %}
 
+    <ul>
+      {% for food_item in foods %}
+      <br>
+      {% comment %} {{food_item.food_picture.url}} {% endcomment %}
+      <div class='col-wrap'>
+        <div class='col-20'>
+            <img class="small-img" src="{{food_item.food_picture.url}}">
+        </div>
+        <div class='col-80'>
+            Rest ID:{{food_item.restaurant.id }}
+            Food ID:{{food_item.id}}
+              <h3>{{ food_item.name }}</h3>
+              <p class="item-price">NZD${{ food_item.food_price }}</p>
+              <p>{{ food_item.description }} </p>
+              {% comment %} resturant owner : {{food.restaurant.restaurant_owner.userprofile}}
+              Logged in User :{{restaurant.restaurant_owner}} =={{user.userprofile}} {% endcomment %}
+              {%  if user|user_belongs_to_group:'RestaurantOwner' and restaurant.restaurant_owner == user.userprofile %}
+                <a class='btn btn-dark' href="{% url 'edit-food' food_id=food_item.id %}">Edit</a>
+                <a class='btn btn-action' href="{% url 'delete-food' food_id=food_item.id  %}">Delete {{food_item.name}}</a>
+              {% endif %}
+        </div>
+    </div>
+      {% empty %}
+        <li>No food items added yet.</li>
+      {% endfor %}
+    </ul>
+</section>
+
+<section>
+    <h2>Reviews</h2>
+    
+    <ul>
+     
+        {% for review in reviews %}
+            <ul>
+                <div class="reviews-wrap">
+                    <li>
+                        <h3 class="rev-name">{{ review.user.this_user.username|title }}</h3>
+                        <div class="rating-wrap">
+                            {% for _ in "x"|ljust:review.rating %}
+                                <img class="icon" src="{% static 'images/icons/star.png' %}">
+                            {% endfor %}
+                            {% comment %} <a class="r-info-text">{{ review.rating }}</a> {% endcomment %}
+                        </div>
+                        <p class="review-text text">{{ review.comment }}</p>
+                    </li>
+                </div>
+            </ul>
+        {% empty %}
+            <p>No reviews available for this restaurant.</p>
+        {% endfor %}
+    </ul>
+    <!--Add review-->
+    {%  if user|user_belongs_to_group:'Customer' %}
+    <div>
+            {% comment %} <form method="post" action="{% url 'write-a-review' restaurant_id=restaurant.id%}">
+                {% csrf_token %}
+                {{ form.as_p }}  {# Use form.as_p to render form fields #}
+                <button type="submit" class="btn btn-primary">write-a-review</button>
+            </form> {% endcomment %}
+            <a class='btn btn-action' href="{% url 'write-a-review' restaurant_id=restaurant.id %}">add review</a>  
+        
+    </div>
+    {% endif %}
+</section>
+
+
+
+{% endblock %}

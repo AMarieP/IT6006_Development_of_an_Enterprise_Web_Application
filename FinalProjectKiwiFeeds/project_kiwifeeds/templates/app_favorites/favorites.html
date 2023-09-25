@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<section>
+    <h1>My Favorite Restaurants</h1>
+        
+    {% if user_profile %}
+        <p>Welcome, {{ user_profile.this_user.username }}!</p>
+    {% endif %}
+
+    {% if restaurants_list %}
+        <ul>
+            {% with restaurant_list=restaurants_list %}
+                {% include 'components/restaurant_list_card.html' %}
+            {% endwith %}
+        </ul>
+    {% else %}
+        <p>You haven't added any favorite restaurants yet.</p>
+    {% endif %}
+
+</section>
+{% endblock %}
