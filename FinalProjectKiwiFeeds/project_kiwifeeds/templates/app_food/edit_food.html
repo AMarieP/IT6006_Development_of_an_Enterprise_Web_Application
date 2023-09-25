@@ -6,13 +6,8 @@
     <hr>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-<<<<<<< HEAD
         {{ form.as_p }}
         <button type="submit">Update Food</button>
-=======
-        {{form.as_p}}
-        <input class="btn btn-action" type="submit"/>
->>>>>>> origin/max-4-working
     </form>
 </section>
 {% endblock %}
