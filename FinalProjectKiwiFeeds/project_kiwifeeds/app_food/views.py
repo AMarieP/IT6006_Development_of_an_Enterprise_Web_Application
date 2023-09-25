@@ -47,29 +47,46 @@ class FoodCreateView(CreateView):
     
 
 
+class FoodUpdateView(UpdateView):
+    model = Food
+    form_class = FoodForm
+    template_name = 'app_food/edit_food.html'
+    raise_exception = True
 
-# class FoodUpdateView(UpdateView):
-#     model = Food
-#     form_class = FoodForm
-#     template_name = 'app_food/edit_food.html'
-    
-#     def get_success_url(self):
-#         food_id = self.kwargs['food_id']
-#         return reverse_lazy('view-food', kwargs={'food_id': food_id})
+    def get_object(self, queryset=None):
+        # Get the food instance based on the URL parameter
+        food_id = self.kwargs['food_id']
+        return get_object_or_404(Food, pk=food_id)
+
+    def form_valid(self, form):
+        # Save the form and handle success
+        response = super().form_valid(form)
+     
+        print('Food item updated successfully.')
+        messages.success(self.request, "Food item updated successfully.")
+        return response
+
+    def get_success_url(self):
+        # Use reverse_lazy with arguments to generate the success URL
+        food_id = self.kwargs['food_id']
+        food=Food.objects.get(pk=food_id)
+        restaurant_id=food.restaurant.id
+        return reverse_lazy('restaurant-details', args=[restaurant_id])
 
 
 def EditFood(request,food_id):
     model = Food.objects.get(pk=food_id)
     form = FoodForm()
     if request.method == "POST":
+        print('request for edit food rcd')
         print(request.POST)
         form=FoodForm(request.POST, instance=model)
         if form.is_valid():
+            print('form saved')
             form.save()
         else:
+            print('form not valid')
             form=FoodForm()
-        # return HttpResponseRedirect("/food/")
-        # for editing food within restaurant page
         return HttpResponseRedirect(f"/restaurants/{model.restaurant.id}/")
     else:
         form=FoodForm(instance=model)

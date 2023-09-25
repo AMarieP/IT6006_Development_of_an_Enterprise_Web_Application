@@ -88,16 +88,6 @@ def RestaurantEditView(request, restaurant_id):
                 restaurant_form.save()
                 return HttpResponseRedirect(f"/restaurants/{restaurant.id}")
 
-        # # Check if the form for adding food items is submitted
-        # elif 'add_food_form' in request.POST:
-        #     food_form = FoodForm(request.POST)
-        #     if food_form.is_valid():
-        #         food = food_form.save(commit=False)
-        #         food.restaurant = restaurant
-        #         food.save()
-        #         # Redirect back to the edit restaurant page
-        #         return HttpResponseRedirect(f"/restaurants/{restaurant_id}/edit/")
-
     else:
         # Initialize forms for editing restaurant and adding food items
         restaurant_form = RestaurantForm(instance=restaurant)

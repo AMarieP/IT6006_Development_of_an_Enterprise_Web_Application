@@ -16,8 +16,6 @@ class Food(models.Model):
     description = models.CharField(max_length=300)
     food_price = models.DecimalField(max_digits=5, decimal_places=2)
     restaurant = models.ForeignKey('app_restaurants.Restaurant', on_delete=models.PROTECT,related_name='food')
-    
-    
     food_picture = models.ImageField(
         # default='/profile_pics/temp_pfp_placeholder_REPLACE_LATER.avif',
         upload_to=get_food_image_upload_path,
